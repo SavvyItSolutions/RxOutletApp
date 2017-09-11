@@ -98,6 +98,7 @@ namespace RxOutlet.ViewModels
                     {
                         await Application.Current.MainPage.DisplayAlert("RxOutlet", "Please check the internet connection", "OK");
                         return;
+
                     }
 
                     ObjRegResponse = await signUpBR.RegModel(new RegistrationModel()
