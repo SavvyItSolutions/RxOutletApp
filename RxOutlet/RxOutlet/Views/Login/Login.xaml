@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RxOutlet.Views.Login.Login"
+             xmlns:customControl="clr-namespace:RxOutlet.CustomControls">
+
+    <Grid BackgroundColor="{StaticResource Key=LigthGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="6.9*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.8*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="2"
+              BackgroundColor="#F9FAFE"
+              Grid.RowSpan="2"
+              Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="9*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="2" Padding="20,30"
+                  BackgroundColor="#FEFEFE" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="2.5*" />
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Row="0"
+                      RowSpacing="0"
+                      Grid.ColumnSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Text="Email ID"
+                           TextColor="Gray"
+                           FontSize="11"
+                           VerticalTextAlignment="End"
+                           Grid.Row="0"/>
+
+                    <customControl:CustomEntry Grid.Row="1" FontSize="15"
+                                               BorderType="All"
+                                               VerticalOptions="End"
+                                               Text="{Binding Email}"/>
+
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      RowSpacing="0"
+                      Grid.ColumnSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Text="Password"
+                           TextColor="Gray"
+                           Grid.Row="0" 
+                           FontSize="11"
+                           VerticalTextAlignment="End"/>
+
+                    <customControl:CustomEntry Grid.Row="1"
+                                               BorderType="All"
+                                               FontSize="15"
+                                               IsPassword="True"
+                                               VerticalOptions="End"
+                                               Text="{Binding Password}"/>
+                </Grid>
+
+                <StackLayout Grid.Row="3"
+                             Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <Button Text="LOGIN"
+                            BackgroundColor="#E83C24"
+                            TextColor="White"                            
+                            BorderRadius="0"                            
+                            Command="{Binding LoginClickCommand}"
+                            HorizontalOptions="FillAndExpand"/>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}" />
+                </StackLayout>
+                
+                <BoxView BackgroundColor="Gray"
+                         Grid.Column="0"
+                         Grid.Row="4" VerticalOptions="Center"
+                         HeightRequest="1" />
+                
+                <Label Text="Forgot Password ?"
+                       TextColor="Gray"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       Grid.Row="4" FontSize="10" />
+
+                <BoxView BackgroundColor="Gray"
+                         Grid.Column="2"
+                         Grid.Row="4"
+                         VerticalOptions="Center"
+                         HeightRequest="1" />
+                
+                <Grid Grid.Row="4">
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+        
+        <Image Source="Logo.png"
+               Grid.Row="1"
+               Grid.Column="1"
+               Grid.RowSpan="2" />
+
+        <StackLayout Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <Label Text="Not yet registered?"
+                   FontSize="12"
+                   TextColor="Gray"
+                   HorizontalOptions="EndAndExpand"
+                   HorizontalTextAlignment="End"/>
+            <Label Text="Register now"
+                   FontSize="12"
+                   TextColor="Blue"
+                   HorizontalOptions="StartAndExpand"
+                   HorizontalTextAlignment="Start" />
+        </StackLayout>
+    </Grid>
+
+    <!--<Grid x:Name="gridParent"
+          RowSpacing="0"
+          BackgroundColor="{StaticResource Key=White}" Margin="2">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3.5*" />
+            <RowDefinition Height="5.5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Image Source="Logo.png" HeightRequest="200"
+               Grid.Row="0" Aspect="AspectFit" VerticalOptions="End" HorizontalOptions="Center" />
+
+
+        <Grid Grid.Row="1"
+              BackgroundColor="{StaticResource Key=White}"
+              Padding="25,15"
+              RowSpacing="10">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="2.4*" />
+                <RowDefinition Height="0.8*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition Width="9.4*" />
+            </Grid.ColumnDefinitions>
+            
+            <Label TextColor="Red"
+                   VerticalTextAlignment="End"
+                   Text="Error Message"
+                   Grid.Row="0"
+                   FontSize="16"
+                   Grid.ColumnSpan="2"/>
+            
+            <Grid Grid.Row="1"
+                  Padding="1"
+                  BackgroundColor="{StaticResource Key=SecondaryGray}"
+                  Grid.ColumnSpan="2">
+                
+                <Grid BackgroundColor="{StaticResource Key=White}" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*" />
+                        <RowDefinition Height="6*" />
+                    </Grid.RowDefinitions>
+                    <Label TextColor="{StaticResource Key=PrimaryGray}"
+                           Margin="10,10,10,0"
+                           Text="USERNAME"
+                           Grid.Row="0"/>
+
+                    <customControl:CustomEntry BorderType="No" 
+                                               Grid.Row="1"
+                                               Margin="10,0,10,0"
+                                               VerticalOptions="End"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Padding="1"
+                  BackgroundColor="{StaticResource Key=SecondaryGray}"
+                  Grid.ColumnSpan="2">
+                
+                <Grid BackgroundColor="{StaticResource Key=White}" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*" />
+                        <RowDefinition Height="6*" />
+                    </Grid.RowDefinitions>
+                    <Label TextColor="{StaticResource Key=PrimaryGray}"
+                           Margin="10,10,10,0"
+                           Text="PASSWORD"  Grid.Row="0"/>
+                    
+                    <customControl:CustomEntry BorderType="No"
+                                               Grid.Row="1"
+                                               Margin="10,0,10,0"
+                                               VerticalOptions="End" 
+                                               IsPassword="True"/>
+                </Grid>
+            </Grid>
+
+            <Button BackgroundColor="{StaticResource Key=Orange}"
+                    Grid.Row="3"
+                    Text="LOGIN"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    BorderRadius="1"
+                    Grid.ColumnSpan="2"
+                    TextColor="{StaticResource Key=White}"
+                    VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+            <Image Source="Check.png"
+                   Grid.Column="0" Grid.Row="4" VerticalOptions="Center" />
+            
+            <Label Text="Remember me?"
+                   Grid.Row="4"
+                   TextColor="{StaticResource Key=PrimaryGray}"
+                   FontSize="17" 
+                   Grid.Column="1"
+                   VerticalTextAlignment="Center"/>
+        </Grid>
+        
+        <customControl:CustomLabel Text="Forgot your password?"
+                                   IsUnderLine="True"
+               Grid.Row="2"
+                                   TextColor="Blue"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center" />
+    </Grid>-->
+    
+    <!--<Image Source="icon.png"
+                   Grid.Row="0" />
+            
+            <StackLayout Grid.Column="0"
+                         Grid.Row="1"
+                         Padding="1"
+                         BackgroundColor="{StaticResource Key=Gray}">
+                <StackLayout BackgroundColor="{StaticResource Key=White}"
+                             Spacing="0"
+                             Padding="10,5,10,0">
+                    <Label Text="USERNAME"
+                           TextColor="{StaticResource Key=Gray}"
+                           VerticalTextAlignment="Center"
+                           FontSize="12" />
+                    <Entry />
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="2"
+                         Padding="1"
+                         BackgroundColor="{StaticResource Key=Gray}">
+                <StackLayout BackgroundColor="{StaticResource Key=White}"
+                             Spacing="0"
+                             Padding="10,5,10,0">
+                    <Label Text="USERNAME"
+                           TextColor="{StaticResource Key=Gray}"
+                           VerticalTextAlignment="Center"
+                           FontSize="12" />
+                    <Entry />
+                </StackLayout>
+            </StackLayout>
+
+        <Button BackgroundColor="{StaticResource Key=Orange}"
+                Text="LOGIN"
+                Grid.Row="3" />-->
+        <!--App icon--><!--
+        <Image x:Name="imgAppIcon"
+               Grid.Row="0"
+               HeightRequest="100"
+               WidthRequest="100"                  
+               Source="icon.png"
+               VerticalOptions="End"
+               HorizontalOptions="Center"
+               Aspect="AspectFit"/>
+
+        --><!--Login Content--><!--
+        <Grid BackgroundColor="{StaticResource Key=White}" 
+                     Grid.Row="1" Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="lblErrorMsg" 
+               Text="Error Message" 
+                   TextColor="Red"
+                   FontSize="18" 
+                   Grid.Row="0" Grid.Column="0"
+                   Grid.ColumnSpan="3"/>
+
+            <Image x:Name="imgUser" Grid.Column="0"
+                   Grid.Row="1" Source="icon.png"/>
+
+            <Entry Placeholder="Enter Name."
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2" />
+
+            <Image x:Name="imgPsw" Grid.Column="0"
+                   Grid.Row="2" Source="icon.png"/>
+
+            <Entry Placeholder="Enter Name." Grid.Row="2" Grid.Column="1"
+                   Grid.ColumnSpan="2"/>
+
+            <Label x:Name="lblRemember"
+                   Text="Remember me?"
+                   TextColor="{StaticResource PrimaryBlack}"
+                   FontSize="18"
+                   Grid.Row="3"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   VerticalTextAlignment="Center"/>
+            
+            <Button x:Name="btnLogin"
+                    Grid.Column="2"
+                    Grid.Row="3"
+                    Text="Login" />
+
+        </Grid>
+        
+        --><!--BottomLine--><!--
+        <BoxView BackgroundColor="White" Grid.Row="2"/>
+
+        --><!--Signup/Forget Psw--><!--
+        <Grid x:Name="gridFooter" 
+              Grid.Column="0"
+              Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="lblForgotPsw"
+                   Text="Forgot Password?"
+                   TextColor="White"
+                   FontSize="18"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="15" />
+
+            <BoxView BackgroundColor="White" Grid.Row="0" Grid.Column="1"/>
+
+            <Label x:Name="lblSignUp"
+                   Text="SignUp"
+                   TextColor="White"
+                   FontSize="18"
+                   Grid.Row="0"
+                   Grid.Column="2"
+                   Margin="15"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center" />
+        </Grid>-->
+    
+</ContentPage>

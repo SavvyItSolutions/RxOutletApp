@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RxOutlet.Views.Login.SignUp" BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Message}"
+                   TextColor="Red" />
+
+            <Entry x:Name="txtUserName"
+                   Placeholder="User Name"
+                   Text="{Binding Name}" />
+            
+            <Entry x:Name="txtEailID"
+                   Placeholder="Email ID"
+                   Text="{Binding Email}" />
+
+            <Entry x:Name="txtPsw"
+                   Placeholder="Password"
+                   IsPassword="True"
+                   Text="{Binding Password}" />
+
+            <Entry x:Name="txtConPsw"
+                   Placeholder="Confirm Password"
+                   IsPassword="True"
+                   Text="{Binding ConfirmPassword}" />
+
+            <Entry x:Name="txtPhoneNo"
+                   Placeholder="Phone Number"
+                   Text="{Binding MobileNum}" />
+            
+            <StackLayout Orientation="Horizontal">
+                <Button Text="SignUp"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding SignUpClickCommand}"
+                        BackgroundColor="Green" 
+                        TextColor="White"/>
+                <ActivityIndicator IsVisible="{Binding IsBusy}"
+                                   IsRunning="{Binding IsBusy}" />
+            </StackLayout>
+           
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
