@@ -5,14 +5,14 @@ using Xamarin.Forms.Xaml;
 namespace RxOutlet.Views.Login
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Prescription : ContentPage
+    public partial class FillNewPrescription : ContentPage
     {
-        public Prescription()
+        public FillNewPrescription()
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = new PrescriptionViewModel(Navigation);
+            BindingContext = new FillNewPrescriptionViewModel(Navigation);
         }
     }
 }

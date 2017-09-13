@@ -40,7 +40,10 @@ namespace RxOutlet.ViewModels
             set { SetProperty(ref rememberMe, value); }
         }
 
-        public Command LoginClickCommand { get; }
+        public Command LoginClickCommand
+        {
+            get => new Command(async () => await LoginClick());
+        }
 
         #endregion
 
@@ -51,7 +54,6 @@ namespace RxOutlet.ViewModels
             try
             {
                 objRxOutletBR = new RxOutletBR();
-                LoginClickCommand = new Command(async () => await LoginClick());
             }
             catch (Exception ex)
             {
@@ -66,31 +68,46 @@ namespace RxOutlet.ViewModels
         private async Task LoginClick()
         {
             int statusCode;
-
-            IsBusy = true;
-
-            if(!DeviceInformation.CheckDeviceInternetAccess())
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("RxOutlet","Please check the internet connection", "OK");
-                return;
-            }
+                IsBusy = true;
 
-            if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
-            {
-                objLoginModel.Email = Email;
-                objLoginModel.Password = Password;
+                if (!DeviceInformation.CheckDeviceInternetAccess())
+                {
+                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, "Please check the internet connection", YesNO.OK.ToString());
+                    return;
+                }
 
-                statusCode =  await objRxOutletBR.Login(new LoginModel() { Email = Email, Password = Password });
+                if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
+                {
+                    //if (!Validations.IsEmailValidate(Email))
+                    //{
+                    //    Message = "Invalid Email ID";
+                    //    return;
+                    //}
+                    
+                    statusCode = await objRxOutletBR.Login(new LoginModel() { Email = Email, Password = Password });
 
-                if (statusCode == (int)StatusCode.Success)
-                    await NavigationService.PusyAsync(Navigation, new Prescription());
+                    if (statusCode == (int)StatusCode.Success)
+                        await NavigationService.PusyAsync(Navigation, new Prescription());
+                    else
+                        Message = "Check the server";
+                }
                 else
-                    Message = "Check the server";
-            }
-            else
-                Message = "Please enter Mandatory Fields";
+                    Message = "Please enter Mandatory Fields";
 
-            IsBusy = false;
+                IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ClientError, YesNO.OK.ToString());
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
         }
         
         #endregion 

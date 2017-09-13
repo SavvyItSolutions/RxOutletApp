@@ -3,6 +3,7 @@ using RxOutlet.Common;
 using RxOutlet.Models;
 using RxOutlet.Views.Login;
 using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,7 +16,7 @@ namespace RxOutlet.ViewModels
 
         private RegistrationModel objReg = null;
         private RegistrationResponseModel ObjRegResponse = null;
-        private RxOutletBR signUpBR = null;
+        private RxOutletBR objRxOutletBR = null;
 
         #endregion
 
@@ -73,7 +74,7 @@ namespace RxOutlet.ViewModels
         {
             try
             {
-                signUpBR = new RxOutletBR();
+                objRxOutletBR = new RxOutletBR();
                 SignUpClickCommand = new Command(async () => await SignUpClick());
             }
             catch (Exception ex)
@@ -87,21 +88,39 @@ namespace RxOutlet.ViewModels
         #region Events
 
         private async Task SignUpClick()
-        {           
-            IsBusy = true;
-
-            if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(objReg.Password) && !string.IsNullOrEmpty(objReg.ConfirmPassword))
+        {
+            try
             {
-                if (Password.Equals(ConfirmPassword))
+                IsBusy = true;
+
+                if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(ConfirmPassword))
                 {
-                    if(!DeviceInformation.CheckDeviceInternetAccess())
+                    //if (!Validations.IsEmailValidate(Email))
+                    //{
+                    //    Message = "Invalid Email ID";
+                    //    return;
+                    //}
+
+                    //if (!Password.Equals(ConfirmPassword))
+                    //{
+                    //    Message = Messages.ConfirmPassword;
+                    //    return;
+                    //}
+
+                    //var res = Validations.IsPasswordValidate(Password);
+                    //if (!res.Item1)
+                    //{
+                    //    Message = res.Item2;
+                    //    return;
+                    //}
+
+                    if (!DeviceInformation.CheckDeviceInternetAccess())
                     {
                         await Application.Current.MainPage.DisplayAlert("RxOutlet", "Please check the internet connection", "OK");
                         return;
-
                     }
 
-                    ObjRegResponse = await signUpBR.RegModel(new RegistrationModel()
+                    ObjRegResponse = await objRxOutletBR.SignUp(new RegistrationModel()
                     {
                         Name = Name,
                         Email = Email,
@@ -111,20 +130,25 @@ namespace RxOutlet.ViewModels
                         Captcha = Captcha
                     });
 
-                    if (ObjRegResponse.Success)
+                    if (ObjRegResponse != null && ObjRegResponse.Success)
                         await NavigationService.PusyAsync(Navigation, new Login());
                     else
-                        Message = "Failur";
+                        Message = ObjRegResponse.Error[0];
                 }
                 else
-                {
-                    Message = Messages.ConfirmPassword;
-                }
-            }
-            else
-                Message = "Please enter Mandatory Fields";
+                    Message = "Please enter Mandatory Fields";
 
-            IsBusy = false;
+                IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ClientError, YesNO.OK.ToString());
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         #endregion

@@ -9,11 +9,11 @@ namespace RxOutlet.BusinessRules
     {
         RxOutletServiceWrapper service = new RxOutletServiceWrapper();
         
-        public async Task<RegistrationResponseModel> RegModel(RegistrationModel model)
+        public async Task<RegistrationResponseModel> SignUp(RegistrationModel model)
         {
             try
             {
-                return await service.Registration(model);
+                return await service.SignUp(model);
             }
             catch (Exception ex)
             {
@@ -26,6 +26,18 @@ namespace RxOutlet.BusinessRules
             try
             {
                 return await service.Login(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<int> UploadPrescription(UploadPrescriptionModel model)
+        {
+            try
+            {
+                return await service.UploadPrescription(model);
             }
             catch (Exception ex)
             {

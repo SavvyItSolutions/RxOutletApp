@@ -12,4 +12,11 @@ namespace RxOutlet.Common
     {
         Success = 0
     }
+
+    public enum YesNO
+    {
+        Yes,
+        No,
+        OK
+    }
 }

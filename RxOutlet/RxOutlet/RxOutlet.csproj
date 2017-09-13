@@ -41,6 +41,7 @@
     <Compile Include="Common\DeviceInformation.cs" />
     <Compile Include="Common\Messages.cs" />
     <Compile Include="Common\RxEnums.cs" />
+    <Compile Include="Common\Validations.cs" />
     <Compile Include="CustomControls\CustomEditor.cs" />
     <Compile Include="CustomControls\CustomEntry.cs" />
     <Compile Include="CustomControls\CustomLabel.cs" />
@@ -49,17 +50,24 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationService.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
-    <Compile Include="ViewModels\PrescriptionViewModel.cs" />
+    <Compile Include="ViewModels\FillNewPrescriptionViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login\Prescription.xaml.cs">
-      <DependentUpon>Prescription.xaml</DependentUpon>
+    <Compile Include="Views\Login\FillNewPrescription.xaml.cs">
+      <DependentUpon>FillNewPrescription.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\Prescription.cs" />
+    <Compile Include="Views\Login\RefillYourPrescription.xaml.cs">
+      <DependentUpon>RefillYourPrescription.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\TransferYourPrescription.xaml.cs">
+      <DependentUpon>TransferYourPrescription.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +84,7 @@
       <HintPath>..\..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="RxOutlet.Models">
-      <HintPath>..\..\..\..\..\Documents\dll's\RxOutlet.Models.dll</HintPath>
+      <HintPath>..\..\packages\RxOutlet.Models.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
@@ -114,13 +122,25 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Login\Prescription.xaml">
+    <EmbeddedResource Include="Views\Login\FillNewPrescription.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Login\RefillYourPrescription.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Login\TransferYourPrescription.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

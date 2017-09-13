@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RxOutlet.Views.Login.Prescription"
+             x:Class="RxOutlet.Views.Login.FillNewPrescription"
              xmlns:customControl="clr-namespace:RxOutlet.CustomControls"
+             Title="Fill New Prescription"
              BackgroundColor="White">
+
     <ContentPage.Content>
         <Grid BackgroundColor="#F1F2F6">
             <Grid.RowDefinitions>
@@ -18,10 +20,19 @@
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
 
-            <Label Text="Fill New Prescription"  Grid.Row="0" Grid.Column="1" TextColor="Green" 
-                   VerticalTextAlignment="End" HorizontalTextAlignment="Center" FontSize="13"/>
-            
-            <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BackgroundColor="White" Padding="0,15">
+            <Label Text="Fill New Prescription"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   TextColor="Green"
+                   VerticalTextAlignment="End"
+                   HorizontalTextAlignment="Center"
+                   FontSize="13" />
+
+            <Grid Grid.Row="1"
+                  Grid.RowSpan="2"
+                  Grid.Column="1"
+                  BackgroundColor="White"
+                  Padding="0,15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -30,12 +41,12 @@
                 </Grid.RowDefinitions>
 
                 <Label Text="Please Fill New Prescription by Updating the Prescription or by Filling the form"
-                       Grid.Row="0" 
+                       Grid.Row="0"
                        TextColor="Gray"
                        FontSize="12"
                        Margin="10,0"
                        VerticalTextAlignment="Center"
-                       HorizontalTextAlignment="Center"/>
+                       HorizontalTextAlignment="Center" />
 
                 <Image Source="Camera.png"
                        Grid.Row="1"
@@ -46,18 +57,19 @@
                     </Image.GestureRecognizers>
                 </Image>
 
-                <Grid Grid.Row="2" Padding="10,0">
+                <Grid Grid.Row="2"
+                      Padding="10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*" />
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <BoxView BackgroundColor="Gray"
                              HeightRequest="1"
                              Grid.Column="0"
-                             VerticalOptions="Center"/>
-                    
+                             VerticalOptions="Center" />
+
                     <Label Text="OR"
                            TextColor="Gray"
                            Grid.Column="1"
@@ -69,71 +81,94 @@
                     <BoxView BackgroundColor="Gray"
                              HeightRequest="1"
                              Grid.Column="2"
-                             VerticalOptions="Center" />                    
+                             VerticalOptions="Center" />
                 </Grid>
 
                 <ScrollView Grid.Row="3">
-                <Grid Padding="30,0" RowSpacing="10">
-                    
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    
-                    <Grid Grid.Row="0" RowSpacing="0">
+                    <Grid Padding="30,0"
+                          RowSpacing="10">
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Label Text="Physician Name:"
-                               TextColor="Gray"
-                               Grid.Row="0" VerticalTextAlignment="End" FontSize="11" />
-                        <customControl:CustomEntry  BorderType="All" Grid.Row="1"
-                                                    FontSize="15"
-                                                    VerticalOptions="End" />
-
-                    </Grid>
-
-                    <Grid Grid.Row="1" RowSpacing="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Label Text="Physician Number:"
-                               TextColor="Gray"
-                               Grid.Row="0" VerticalTextAlignment="End" FontSize="11"/>
-                        <customControl:CustomEntry  BorderType="All"
-                                                    FontSize="15"
-                                                    VerticalOptions="End" Grid.Row="1" />
-
-                    </Grid>
-
-                    <Grid Grid.Row="2" RowSpacing="0">
-                        <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Label Text="Medication For:"
-                               TextColor="Gray"
-                               Grid.Row="0" VerticalTextAlignment="End" FontSize="11"/>
-                        <customControl:CustomEditor   Grid.Row="1"
-                                                      FontSize="15" />
 
+                        <Grid Grid.Row="0"
+                              RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Text="Physician Name:"
+                                   TextColor="Gray"
+                                   Grid.Row="0"
+                                   VerticalTextAlignment="End"
+                                   FontSize="11" />
+                            <customControl:CustomEntry  BorderType="All"
+                                                        Grid.Row="1"
+                                                        FontSize="15"
+                                                        VerticalOptions="End"
+                                                        Text="{Binding PhysicianName}" />
+
+                        </Grid>
+
+                        <Grid Grid.Row="1"
+                              RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <Label Text="Physician Number:"
+                                   TextColor="Gray"
+                                   Grid.Row="0"
+                                   VerticalTextAlignment="End"
+                                   FontSize="11" />
+                            
+                            <customControl:CustomEntry  BorderType="All"
+                                                        FontSize="15"
+                                                        VerticalOptions="End"
+                                                        Grid.Row="1"
+                                                        Text="{Binding PhysicianNumber}"/>
+
+                        </Grid>
+
+                        <Grid Grid.Row="2"
+                              RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Label Text="Medication For:"
+                                   TextColor="Gray"
+                                   Grid.Row="0"
+                                   VerticalTextAlignment="End"
+                                   FontSize="11" />
+                            
+                            <customControl:CustomEditor   Grid.Row="1"
+                                                          FontSize="15"
+                                                          Text="{Binding MedicationFor}"/>
+
+                        </Grid>
+
+                        <Button BackgroundColor="Green"
+                                Text="Submit"
+                                BorderRadius="0"
+                                Grid.Row="3"
+                                TextColor="White"
+                                Command="{Binding SubmitClickCommand}" />
                     </Grid>
-
-                    <Button BackgroundColor="Green"
-                            Text="Submit" 
-                            BorderRadius="0"
-                            Grid.Row="3" 
-                            TextColor="White"/>
-                </Grid>
                 </ScrollView>
             </Grid>
 
             <Grid IsVisible="{Binding IsShow}"
-                  Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"
+                  Grid.Row="2"
+                  Grid.RowSpan="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3"
                   BackgroundColor="Gray">
 
                 <Image Source="Camera.png"
@@ -172,4 +207,5 @@
 
         </StackLayout>-->
     </ContentPage.Content>
+
 </ContentPage>
