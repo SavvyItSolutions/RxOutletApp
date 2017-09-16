@@ -51,6 +51,7 @@
     <Compile Include="ViewModels\NavigationService.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\FillNewPrescriptionViewModel.cs" />
+    <Compile Include="ViewModels\RefillYourPrescriptionViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Login\Login.xaml.cs">
@@ -68,6 +69,9 @@
     </Compile>
     <Compile Include="Views\Login\TransferYourPrescription.xaml.cs">
       <DependentUpon>TransferYourPrescription.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +142,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Login\TransferYourPrescription.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Login\Welcome.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

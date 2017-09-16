@@ -6,10 +6,10 @@ using System;
 using Android.Net;
 using Android.Content;
 
-[assembly:Dependency(typeof(DeviceInformation))]
+[assembly:Dependency(typeof(AndroidDeviceInformation))]
 namespace RxOutlet.Droid.DependencyImplementation
 {
-    public class DeviceInformation : IDeviceInformation
+    public class AndroidDeviceInformation : IDeviceInformation
     {
         public bool CheckDeviceInternetAccess()
         {

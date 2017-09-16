@@ -9,7 +9,7 @@ namespace RxOutlet
         {
             InitializeComponent();
 
-            MainPage = new  NavigationPage(new SignUp());
+            MainPage = new  NavigationPage(new Prescription());
         }
 
         protected override void OnStart()

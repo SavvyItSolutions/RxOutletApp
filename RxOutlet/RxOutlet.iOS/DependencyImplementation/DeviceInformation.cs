@@ -6,10 +6,13 @@ using System.Net;
 using SystemConfiguration;
 using CoreFoundation;
 using Security;
+using Xamarin.Forms;
+using RxOutlet.iOS.DependencyImplementation;
 
+[assembly:Dependency(typeof(iOSDeviceInformation))]
 namespace RxOutlet.iOS.DependencyImplementation
 {
-    public class DeviceInformation : IDeviceInformation
+    public class iOSDeviceInformation : IDeviceInformation
     {
         private NetworkReachability defaultRouteReachability;
         private event EventHandler ReachabilityChanged;

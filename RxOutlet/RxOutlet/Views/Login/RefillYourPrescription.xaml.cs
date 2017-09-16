@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RxOutlet.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,9 @@ namespace RxOutlet.Views.Login
         public RefillYourPrescription()
         {
             InitializeComponent();
+
+            NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = new RefillYourPrescriptionViewModel(Navigation);
         }
     }
 }

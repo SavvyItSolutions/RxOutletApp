@@ -2,10 +2,62 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RxOutlet.Views.Login.RefillYourPrescription"
-             Title="Refill Your Prescription">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
-        </StackLayout>
-    </ContentPage.Content>
+             Title="Refill Your Prescription" BackgroundColor="White">
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Entry Placeholder="Prescription Number"
+               Grid.Column="0"
+               Grid.Row="0" />
+        
+        <Button Text="Refill"
+                Grid.Column="1"
+                Grid.Row="0" BackgroundColor="Green" TextColor="White" />
+
+        <ListView Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="1"
+                  ItemsSource="{Binding ListOfPrescription}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding PrescriptionNum}"
+                                   Grid.Column="0"
+                                   Grid.Row="0" />
+
+                            <Label Text="{Binding PrescriptionName}"
+                                   Grid.Column="1"
+                                   Grid.Row="0" />
+
+                            <Label Text="{Binding LastDate}"
+                                   Grid.Column="0"
+                                   Grid.Row="1" />
+
+                            <Label Text="{Binding RefillItems}"
+                                   Grid.Column="1"
+                                   Grid.Row="1" />
+                            
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>

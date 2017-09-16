@@ -14,5 +14,11 @@ namespace RxOutlet.Views.Login
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = new SignUpViewModel(Navigation);
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Navigation.PopAsync();
+            return base.OnBackButtonPressed();
+        }
     }
 }

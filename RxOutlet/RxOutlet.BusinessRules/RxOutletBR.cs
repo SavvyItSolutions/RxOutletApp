@@ -44,5 +44,17 @@ namespace RxOutlet.BusinessRules
                 throw ex;
             }
         }
+
+        public async Task UploadProfilePic(Byte[] myByteArray, int i)
+        {
+            try
+            {
+                await RxOutletServiceWrapper.UploadProfilePic(myByteArray, i);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

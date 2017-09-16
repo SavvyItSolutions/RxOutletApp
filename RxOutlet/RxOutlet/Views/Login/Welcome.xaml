@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RxOutlet.Views.Login.Welcome" BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Welcome To RxOutlet"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center" 
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   FontSize="20"
+                   Grid.Row="0"
+                   TextColor="Gray"/>
+            
+            <Button Text="Sign Up" Margin="10,10,5,10" BorderRadius="0"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    BackgroundColor="Green"
+                    TextColor="White" Clicked="SignUpClicked"/>
+
+            <Button Text="Login"
+                    Margin="5,10,10,10"
+                    BorderRadius="0"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Clicked="LoginClicked"/>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

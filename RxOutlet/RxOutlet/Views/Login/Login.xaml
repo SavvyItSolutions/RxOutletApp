@@ -19,6 +19,8 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
+        <Label x:Name="lblMsg"
+               LineBreakMode="WordWrap" TextColor="Green" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
         <Grid Grid.Row="2"
               BackgroundColor="#F9FAFE"
               Grid.RowSpan="2"
@@ -30,8 +32,10 @@
                 <RowDefinition Height="9*" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="2" Padding="20,30"
-                  BackgroundColor="#FEFEFE" RowSpacing="10">
+            <Grid Grid.Row="2"
+                  Padding="20,30"
+                  BackgroundColor="#FEFEFE"
+                  RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -46,7 +50,7 @@
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="2.5*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid Grid.Row="0"
                       RowSpacing="0"
                       Grid.ColumnSpan="3">
@@ -54,17 +58,18 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    
+
                     <Label Text="Email ID"
                            TextColor="Gray"
                            FontSize="11"
                            VerticalTextAlignment="End"
-                           Grid.Row="0"/>
+                           Grid.Row="0" />
 
-                    <customControl:CustomEntry Grid.Row="1" FontSize="15"
+                    <customControl:CustomEntry Grid.Row="1"
+                                               FontSize="15"
                                                BorderType="All"
                                                VerticalOptions="End"
-                                               Text="{Binding Email}"/>
+                                               Text="{Binding Email}" />
 
                 </Grid>
 
@@ -75,76 +80,81 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    
+
                     <Label Text="Password"
                            TextColor="Gray"
-                           Grid.Row="0" 
+                           Grid.Row="0"
                            FontSize="11"
-                           VerticalTextAlignment="End"/>
+                           VerticalTextAlignment="End" />
 
                     <customControl:CustomEntry Grid.Row="1"
                                                BorderType="All"
                                                FontSize="15"
                                                IsPassword="True"
                                                VerticalOptions="End"
-                                               Text="{Binding Password}"/>
+                                               Text="{Binding Password}" />
                 </Grid>
 
                 <StackLayout Grid.Row="3"
-                             Grid.ColumnSpan="3" Orientation="Horizontal">
+                             Grid.ColumnSpan="3"
+                             Orientation="Horizontal">
                     <Button Text="LOGIN"
                             BackgroundColor="#E83C24"
-                            TextColor="White"                            
-                            BorderRadius="0"                            
+                            TextColor="White"
+                            BorderRadius="0"
                             Command="{Binding LoginClickCommand}"
-                            HorizontalOptions="FillAndExpand"/>
+                            HorizontalOptions="FillAndExpand" />
                     <ActivityIndicator IsRunning="{Binding IsBusy}"
                                        IsVisible="{Binding IsBusy}" />
                 </StackLayout>
-                
+
                 <BoxView BackgroundColor="Gray"
                          Grid.Column="0"
-                         Grid.Row="4" VerticalOptions="Center"
+                         Grid.Row="4"
+                         VerticalOptions="Center"
                          HeightRequest="1" />
-                
+
                 <Label Text="Forgot Password ?"
                        TextColor="Gray"
                        Grid.Column="1"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="Center"
-                       Grid.Row="4" FontSize="10" />
+                       Grid.Row="4"
+                       FontSize="10" />
 
                 <BoxView BackgroundColor="Gray"
                          Grid.Column="2"
                          Grid.Row="4"
                          VerticalOptions="Center"
                          HeightRequest="1" />
-                
+
                 <Grid Grid.Row="4">
 
                 </Grid>
 
             </Grid>
         </Grid>
-        
+
         <Image Source="Logo.png"
                Grid.Row="1"
                Grid.Column="1"
                Grid.RowSpan="2" />
 
-        <StackLayout Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+        <StackLayout Grid.Row="4"
+                     Grid.Column="1"
+                     Orientation="Horizontal">
             <Label Text="Not yet registered?"
                    FontSize="12"
                    TextColor="Gray"
                    HorizontalOptions="EndAndExpand"
-                   HorizontalTextAlignment="End"/>
+                   HorizontalTextAlignment="End" />
             <Label Text="Register now"
                    FontSize="12"
                    TextColor="Blue"
                    HorizontalOptions="StartAndExpand"
                    HorizontalTextAlignment="Start" />
         </StackLayout>
-        
+
     </Grid>
-    
+
 </ContentPage>

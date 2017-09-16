@@ -122,9 +122,17 @@ namespace RxOutlet.ViewModels
 
                 if (file == null) return;
 
-                Img = ImageSource.FromStream(() => file.GetStream());
+                using (var memoryStream = new MemoryStream())
+                {
+                    file.GetStream().CopyTo(memoryStream);
+                    file.Dispose();
+                    Byte[] imageAsBytes = memoryStream.ToArray();
+                    await objRxOutletBR.UploadProfilePic(imageAsBytes, 1);
+                }
+                 
+                //Img = ImageSource.FromStream(() => file.GetStream());
 
-                Message = string.Empty;
+                Message = "Uploaded Image Successfully";
             }
             catch (Exception ex)
             {
@@ -157,9 +165,11 @@ namespace RxOutlet.ViewModels
                     file.GetStream().CopyTo(memoryStream);
                     file.Dispose();
                     Byte[] imageAsBytes = memoryStream.ToArray();
+                    await objRxOutletBR.UploadProfilePic(imageAsBytes, 1);
+
                 }
 
-                Img = ImageSource.FromStream(() => file.GetStream());
+                //Img = ImageSource.FromStream(() => file.GetStream());
 
                 Message = "Updated Image Successfully";
 

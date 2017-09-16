@@ -131,7 +131,7 @@ namespace RxOutlet.ViewModels
                     });
 
                     if (ObjRegResponse != null && ObjRegResponse.Success)
-                        await NavigationService.PusyAsync(Navigation, new Login());
+                        await NavigationService.PusyAsync(Navigation, new Login(true));
                     else
                         Message = ObjRegResponse.Error[0];
                 }
