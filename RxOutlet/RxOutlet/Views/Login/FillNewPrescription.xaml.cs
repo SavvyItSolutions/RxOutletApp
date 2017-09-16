@@ -7,12 +7,12 @@ namespace RxOutlet.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FillNewPrescription : ContentPage
     {
-        public FillNewPrescription()
+        public FillNewPrescription(string UserID)
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = new FillNewPrescriptionViewModel(Navigation);
+            BindingContext = new FillNewPrescriptionViewModel(Navigation,UserID);
         }
     }
 }

@@ -54,6 +54,8 @@ namespace RxOutlet.ViewModels
             try
             {
                 objRxOutletBR = new RxOutletBR();
+                Email = "vamsikrishna.bvk5@gmail.com";
+                Password = "Vamsi@123";
             }
             catch (Exception ex)
             {
@@ -67,34 +69,46 @@ namespace RxOutlet.ViewModels
 
         private async Task LoginClick()
         {
-            int statusCode;
+            int statusCode = 0;
+            LoginResponse objLoginResponse = null;
             try
             {
                 IsBusy = true;
 
                 if (!DeviceInformation.CheckDeviceInternetAccess())
                 {
-                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, "Please check the internet connection", YesNO.OK.ToString());
+                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.CheckNetConnection, YesNO.OK.ToString());
                     return;
                 }
-
-                if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
+                
+                if (string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(Password))
                 {
-                    //if (!Validations.IsEmailValidate(Email))
-                    //{
-                    //    Message = "Invalid Email ID";
-                    //    return;
-                    //}
-                    
-                    statusCode = await objRxOutletBR.Login(new LoginModel() { Email = Email, Password = Password });
-
-                    if (statusCode == (int)StatusCode.Success)
-                        await NavigationService.PusyAsync(Navigation, new Prescription());
-                    else
-                        Message = "Check the server";
+                    Message = Messages.MandatoryFields; return;
                 }
+
+                if (!Validations.IsEmailValidate(Email))
+                {
+                    Message = Messages.InvalidEmail; return;
+                }
+
+                objLoginResponse = await objRxOutletBR.Login(new LoginModel()
+                {
+                    Email = Email,
+                    Password = Password
+                });
+
+                if (objLoginResponse.Success)
+                {
+                    if (objLoginResponse.IsMailConfirmed)
+                        await NavigationService.PusyAsync(Navigation, new Prescription(objLoginResponse.UserID));
+                    else
+                    {
+                        Message = Messages.ConfirmEmail;
+                        return;
+                    }
+                }                    
                 else
-                    Message = "Please enter Mandatory Fields";
+                    Message = objLoginResponse.ErrorMessage;
 
                 IsBusy = false;
             }
@@ -109,7 +123,7 @@ namespace RxOutlet.ViewModels
             }
 
         }
-        
-        #endregion 
+
+        #endregion
     }
 }

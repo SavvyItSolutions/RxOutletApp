@@ -21,7 +21,7 @@ namespace RxOutlet.BusinessRules
             }
         }
 
-        public async Task<int> Login(LoginModel model)
+        public async Task<LoginResponse> Login(LoginModel model)
         {
             try
             {
@@ -45,11 +45,11 @@ namespace RxOutlet.BusinessRules
             }
         }
 
-        public async Task UploadProfilePic(Byte[] myByteArray, int i)
+        public async Task<int> UploadProfilePic(Byte[] imageAsBytes)
         {
             try
             {
-                await RxOutletServiceWrapper.UploadProfilePic(myByteArray, i);
+                return await service.UploadProfilePic(imageAsBytes);
             }
             catch (Exception ex)
             {

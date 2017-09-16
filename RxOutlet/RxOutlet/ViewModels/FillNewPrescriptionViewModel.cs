@@ -16,6 +16,7 @@ namespace RxOutlet.ViewModels
 
         private bool isFirst = true;
         private RxOutletBR objRxOutletBR = null;
+        private string UserID = string.Empty;
 
         #endregion
 
@@ -66,18 +67,18 @@ namespace RxOutlet.ViewModels
 
         #region Constractor
 
-        public FillNewPrescriptionViewModel(INavigation navigation) : base(navigation)
+        public FillNewPrescriptionViewModel(INavigation navigation, string userID) : base(navigation)
         {
             try
             {
                 objRxOutletBR = new RxOutletBR();
+                UserID = userID;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ClientError, YesNO.OK.ToString());
             }
         }
-
 
         #endregion
 
@@ -120,23 +121,30 @@ namespace RxOutlet.ViewModels
                 
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions());
 
-                if (file == null) return;
+                var path = file.Path;
+                string extension = Path.GetExtension(path);
 
+                if (file == null) return;
+                Byte[] imageAsBytes = null;
                 using (var memoryStream = new MemoryStream())
                 {
                     file.GetStream().CopyTo(memoryStream);
                     file.Dispose();
-                    Byte[] imageAsBytes = memoryStream.ToArray();
-                    await objRxOutletBR.UploadProfilePic(imageAsBytes, 1);
+                    imageAsBytes = memoryStream.ToArray();                    
                 }
-                 
+                int a = await objRxOutletBR.UploadProfilePic(imageAsBytes);
+                //    new ByteArrayModel()
+                //{ array = imageAsBytes});
+
+                if (a > 0)
+                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ImgUploadedSuceess, YesNO.OK.ToString());
                 //Img = ImageSource.FromStream(() => file.GetStream());
 
-                Message = "Uploaded Image Successfully";
+                Message = Messages.ImgUploadedSuceess;
             }
             catch (Exception ex)
             {
-                throw ex;
+                await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ClientError, YesNO.OK.ToString());
             }
         }
 
@@ -156,51 +164,55 @@ namespace RxOutlet.ViewModels
 
                 if (!CrossMedia.Current.IsPickPhotoSupported) return;
 
-                var file = await CrossMedia.Current.PickPhotoAsync( );
+                var file = await CrossMedia.Current.PickPhotoAsync();
 
                 if (file == null) return;
 
+                Byte[] imageAsBytes = null;
                 using (var memoryStream = new MemoryStream())
                 {
                     file.GetStream().CopyTo(memoryStream);
                     file.Dispose();
-                    Byte[] imageAsBytes = memoryStream.ToArray();
-                    await objRxOutletBR.UploadProfilePic(imageAsBytes, 1);
-
+                    imageAsBytes = memoryStream.ToArray();
+                    
                 }
+                var path = file.Path;
+                string extension = Path.GetExtension(path);
+
+                int a = await objRxOutletBR.UploadProfilePic(imageAsBytes);
+                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ImgUploadedSuceess, YesNO.OK.ToString());
 
                 //Img = ImageSource.FromStream(() => file.GetStream());
-
-                Message = "Updated Image Successfully";
-
+                Message = Messages.ImgUploadedSuceess;
             }
             catch (Exception ex)
             {
-                throw ex;
+                await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ClientError, YesNO.OK.ToString());                
             }
         }
 
         private async Task SubmitClick()
         {
-            int statusCode;
+            int insertItemCount;
             try
             {
                 IsBusy = true;
 
                 if (!DeviceInformation.CheckDeviceInternetAccess())
                 {
-                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, "Please check the internet connection", YesNO.OK.ToString());
+                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.CheckNetConnection, YesNO.OK.ToString());
                     return;
                 }
 
-                statusCode = await objRxOutletBR.UploadPrescription(new UploadPrescriptionModel()
+                insertItemCount = await objRxOutletBR.UploadPrescription(new UploadPrescriptionModel()
                 {
                     PhysicianName = PhysicianName,
                     PhysicianNumber = PhysicianNumber,
-                    MedicationFor = medicationFor
+                    MedicationFor = medicationFor,
+                    UserID = UserID
                 });
 
-                if (statusCode == (int)StatusCode.Success)
+                if (insertItemCount > 0)
                     Message = "Success";
                 else
                     Message = "Failur";

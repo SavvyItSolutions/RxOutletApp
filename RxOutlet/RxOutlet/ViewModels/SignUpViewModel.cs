@@ -42,7 +42,7 @@ namespace RxOutlet.ViewModels
             get => password;
             set { SetProperty(ref password, value); }
         }
-        
+
         private string confPassword = string.Empty;
         public string ConfirmPassword
         {
@@ -93,50 +93,47 @@ namespace RxOutlet.ViewModels
             {
                 IsBusy = true;
 
-                if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(ConfirmPassword))
+                if (string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(Password) && string.IsNullOrEmpty(ConfirmPassword))
                 {
-                    //if (!Validations.IsEmailValidate(Email))
-                    //{
-                    //    Message = "Invalid Email ID";
-                    //    return;
-                    //}
-
-                    //if (!Password.Equals(ConfirmPassword))
-                    //{
-                    //    Message = Messages.ConfirmPassword;
-                    //    return;
-                    //}
-
-                    //var res = Validations.IsPasswordValidate(Password);
-                    //if (!res.Item1)
-                    //{
-                    //    Message = res.Item2;
-                    //    return;
-                    //}
-
-                    if (!DeviceInformation.CheckDeviceInternetAccess())
-                    {
-                        await Application.Current.MainPage.DisplayAlert("RxOutlet", "Please check the internet connection", "OK");
-                        return;
-                    }
-
-                    ObjRegResponse = await objRxOutletBR.SignUp(new RegistrationModel()
-                    {
-                        Name = Name,
-                        Email = Email,
-                        Password = Password,
-                        ConfirmPassword = ConfirmPassword,
-                        MobileNum = MobileNum,
-                        Captcha = Captcha
-                    });
-
-                    if (ObjRegResponse != null && ObjRegResponse.Success)
-                        await NavigationService.PusyAsync(Navigation, new Login(true));
-                    else
-                        Message = ObjRegResponse.Error[0];
+                    Message = Messages.MandatoryFields; return;
                 }
+
+                if (!Validations.IsEmailValidate(Email))
+                {
+                    Message = Messages.InvalidEmail; return;
+                }
+
+                if (!Password.Equals(ConfirmPassword))
+                {
+                    Message = Messages.ConfirmPassword; return;
+                }
+
+                var res = Validations.IsPasswordValidate(Password);
+                if (!res.Item1)
+                {
+                    Message = res.Item2; return;
+                }
+
+                if (!DeviceInformation.CheckDeviceInternetAccess())
+                {
+                    await Application.Current.MainPage.DisplayAlert("RxOutlet", Messages.CheckNetConnection, "OK");
+                    return;
+                }
+
+                ObjRegResponse = await objRxOutletBR.SignUp(new RegistrationModel()
+                {
+                    Name = Name,
+                    Email = Email,
+                    Password = Password,
+                    ConfirmPassword = ConfirmPassword,
+                    MobileNum = MobileNum,
+                    Captcha = Captcha
+                });
+
+                if (ObjRegResponse != null && ObjRegResponse.Success)
+                    await NavigationService.PusyAsync(Navigation, new Login(true));
                 else
-                    Message = "Please enter Mandatory Fields";
+                    Message = ObjRegResponse.Error[0];
 
                 IsBusy = false;
             }
@@ -152,6 +149,6 @@ namespace RxOutlet.ViewModels
         }
 
         #endregion
-        
+
     }
 }

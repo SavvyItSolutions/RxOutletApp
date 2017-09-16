@@ -1,6 +1,6 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿//using Microsoft.WindowsAzure.Storage;
+//using Microsoft.WindowsAzure.Storage.Auth;
+//using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using RxOutlet.Models;
 using System;
@@ -46,7 +46,7 @@ namespace RxOutlet.Services
             }
         }
 
-        public async Task<int> Login(LoginModel model)
+        public async Task<LoginResponse> Login(LoginModel model)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace RxOutlet.Services
                 var response = await client.PostAsync(uri, cont).ConfigureAwait(false);
                 var output = await response.Content.ReadAsStringAsync();
 
-                var x = JsonConvert.DeserializeObject<int>(output);
+                var x = JsonConvert.DeserializeObject<LoginResponse>(output);
                 return x;
             }
             catch (Exception ex)
@@ -88,17 +88,36 @@ namespace RxOutlet.Services
         {
             try
             {
-                StorageCredentials sc = new StorageCredentials("icsintegration", "+7UyQSwTkIfrL1BvEbw5+GF2Pcqh3Fsmkyj/cEqvMbZlFJ5rBuUgPiRR2yTR75s2Xkw5Hh9scRbIrb68GRCIXA==");
-                CloudStorageAccount storageaccount = new CloudStorageAccount(sc, true);
-                CloudBlobClient blobClient = storageaccount.CreateCloudBlobClient();
-                CloudBlobContainer container = blobClient.GetContainerReference("rxoutlet");
-                await container.CreateIfNotExistsAsync();
-                //string[] FileEntries = App.System.IO._dir.GetFiles(path);
-                //foreach (string FilePath in FileEntries)
-                //{
-                // string key = System.IO.Path.GetFileName(path);//.GetFileName(FilePath);
-                CloudBlockBlob blob = container.GetBlockBlobReference("Sample" + ".jpg"); //(path);
-                await blob.UploadFromByteArrayAsync(myByteArray, 0, i);
+                //StorageCredentials sc = new StorageCredentials("icsintegration", "+7UyQSwTkIfrL1BvEbw5+GF2Pcqh3Fsmkyj/cEqvMbZlFJ5rBuUgPiRR2yTR75s2Xkw5Hh9scRbIrb68GRCIXA==");
+                //CloudStorageAccount storageaccount = new CloudStorageAccount(sc, true);
+                //CloudBlobClient blobClient = storageaccount.CreateCloudBlobClient();
+                //CloudBlobContainer container = blobClient.GetContainerReference("rxoutlet");
+                //await container.CreateIfNotExistsAsync();
+                ////string[] FileEntries = App.System.IO._dir.GetFiles(path);
+                ////foreach (string FilePath in FileEntries)
+                ////{
+                //// string key = System.IO.Path.GetFileName(path);//.GetFileName(FilePath);
+                //CloudBlockBlob blob = container.GetBlockBlobReference("Sample" + ".jpg"); //(path);
+                //await blob.UploadFromByteArrayAsync(myByteArray, 0, i);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<int> UploadProfilePic(Byte[] model)
+        {
+            try
+            {
+                var uri = new Uri(ServiceURL + "ByteArray");
+                var content = JsonConvert.SerializeObject(model);
+                var cont = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(uri, cont).ConfigureAwait(false);
+                var output = await response.Content.ReadAsStringAsync();
+
+                var x = JsonConvert.DeserializeObject<int>(output);
+                return x;
             }
             catch (Exception ex)
             {
