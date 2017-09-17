@@ -1,6 +1,6 @@
 ﻿using RxOutlet.BusinessRules;
 using RxOutlet.Common;
-using RxOutlet.Models;
+using RxOutlet.Entity;
 using RxOutlet.Views.Login;
 using System;
 using System.Threading.Tasks;
@@ -8,36 +8,34 @@ using Xamarin.Forms;
 
 namespace RxOutlet.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : BaseViewModel
     {
         #region Variables
 
-        private LoginModel objLoginModel = null;
+        private LoginModel objLoginModel = new LoginModel();
+        private LoginResponse objLoginResponse = null;
         private RxOutletBR objRxOutletBR = null;
 
         #endregion
 
         #region Properties
-
-        private string email = string.Empty;
+        
         public string Email
         {
-            get => email;
-            set { SetProperty(ref email, value); }
+            get => objLoginModel.Email;
+            set => objLoginModel.Email = value;
         }
-
-        private string password = string.Empty;
+        
         public string Password
         {
-            get => password;
-            set { SetProperty(ref password, value); }
+            get => objLoginModel.Password;
+            set => objLoginModel.Password = value;
         }
-
-        private bool rememberMe = false;
+        
         public bool RememberMe
         {
-            get => rememberMe;
-            set { SetProperty(ref rememberMe, value); }
+            get => objLoginModel.RememberMe;
+            set => objLoginModel.RememberMe = value;
         }
 
         public Command LoginClickCommand
@@ -69,53 +67,57 @@ namespace RxOutlet.ViewModels
 
         private async Task LoginClick()
         {
-            int statusCode = 0;
-            LoginResponse objLoginResponse = null;
             try
             {
                 IsBusy = true;
 
                 if (!DeviceInformation.CheckDeviceInternetAccess())
                 {
-                    await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.CheckNetConnection, YesNO.OK.ToString());
+                    await DisplayPopUp.NetWorkFailure();
                     return;
                 }
                 
-                if (string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(Password))
+                if (objLoginModel == null && string.IsNullOrEmpty(objLoginModel.Email) && string.IsNullOrEmpty(objLoginModel.Password))
                 {
-                    Message = Messages.MandatoryFields; return;
+                    IsBusy = false;
+                    Message = Messages.MandatoryFields;
+                    return;
                 }
 
                 if (!Validations.IsEmailValidate(Email))
                 {
-                    Message = Messages.InvalidEmail; return;
+                    IsBusy = false;
+                    Message = Messages.InvalidEmail;
+                    return;
                 }
 
-                objLoginResponse = await objRxOutletBR.Login(new LoginModel()
-                {
-                    Email = Email,
-                    Password = Password
-                });
+                objLoginResponse = await objRxOutletBR.Login(objLoginModel);
 
-                if (objLoginResponse.Success)
+                if (objLoginResponse!= null && objLoginResponse.Success)
                 {
                     if (objLoginResponse.IsMailConfirmed)
+                    {
+                        IsBusy = false;
                         await NavigationService.PusyAsync(Navigation, new Prescription(objLoginResponse.UserID));
+                    }                        
                     else
                     {
+                        IsBusy = false;
                         Message = Messages.ConfirmEmail;
                         return;
                     }
                 }                    
                 else
+                {
+                    IsBusy = false;
                     Message = objLoginResponse.ErrorMessage;
-
-                IsBusy = false;
+                }
+                                   
             }
             catch (Exception ex)
             {
                 IsBusy = false;
-                await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ClientError, YesNO.OK.ToString());
+                DisplayPopUp.ClientError();
             }
             finally
             {

@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{807185CE-7C17-4CCB-885E-1E03E1974A1B}</ProjectGuid>
+    <ProjectGuid>{6F3D0CBF-1A37-489B-9A36-20A718FFD846}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RxOutlet.BusinessRules</RootNamespace>
-    <AssemblyName>RxOutlet.BusinessRules</AssemblyName>
+    <RootNamespace>RxOutlet.Entity</RootNamespace>
+    <AssemblyName>RxOutlet.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -35,8 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="ByteArrayModel.cs" />
+    <Compile Include="LoginModel.cs" />
+    <Compile Include="LoginResponse.cs" />
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RxOutletBR.cs" />
+    <Compile Include="SignUpModel.cs" />
+    <Compile Include="SignUpResponseModel.cs" />
+    <Compile Include="UploadPrescriptionModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -51,16 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RxOutlet.Entity\RxOutlet.Entity.csproj">
-      <Project>{6f3d0cbf-1a37-489b-9a36-20a718ffd846}</Project>
-      <Name>RxOutlet.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RxOutlet.Services\RxOutlet.Services.csproj">
-      <Project>{28f19b28-30de-4904-b2ed-dfb56388cddc}</Project>
-      <Name>RxOutlet.Services</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

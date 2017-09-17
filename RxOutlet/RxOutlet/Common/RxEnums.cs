@@ -19,4 +19,9 @@ namespace RxOutlet.Common
         No,
         OK
     }
+
+    public enum ProductName
+    {
+        RxOutlet
+    }
 }

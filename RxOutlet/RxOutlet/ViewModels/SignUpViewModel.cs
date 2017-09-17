@@ -1,70 +1,68 @@
 ﻿using RxOutlet.BusinessRules;
 using RxOutlet.Common;
-using RxOutlet.Models;
+using RxOutlet.Entity;
 using RxOutlet.Views.Login;
 using System;
-using System.Text.RegularExpressions;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace RxOutlet.ViewModels
 {
-    public class SignUpViewModel : ViewModelBase
+    public class SignUpViewModel : BaseViewModel
     {
 
         #region Variables
 
-        private RegistrationModel objReg = null;
-        private RegistrationResponseModel ObjRegResponse = null;
+        private SignUpModel objSignUp = new SignUpModel();
+        private SignUpResponseModel ObjRegResponse = null;
         private RxOutletBR objRxOutletBR = null;
 
         #endregion
 
         #region Properties
-
-        private string name = string.Empty;
+        
         public string Name
         {
-            get => name;
-            set { SetProperty(ref name, value); }
+            get => objSignUp.Name;
+            set => objSignUp.Name = value;
         }
-
-        private string email = string.Empty;
+        
         public string Email
         {
-            get => email;
-            set { SetProperty(ref email, value); }
+            get => objSignUp.Email;
+            set => objSignUp.Email = value;
         }
 
-        private string password = string.Empty;
         public string Password
         {
-            get => password;
-            set { SetProperty(ref password, value); }
+            get => objSignUp.Password;
+            set => objSignUp.Password = value;
         }
-
-        private string confPassword = string.Empty;
+        
         public string ConfirmPassword
         {
-            get => confPassword;
-            set { SetProperty(ref confPassword, value); }
+            get => objSignUp.ConfirmPassword;
+            set => objSignUp.ConfirmPassword = value;
         }
 
-        private string mobileNo = string.Empty;
         public string MobileNum
         {
-            get => mobileNo;
-            set { SetProperty(ref mobileNo, value); }
+            get => objSignUp.MobileNum;
+            set => objSignUp.MobileNum = value;
         }
 
-        private string captcha = string.Empty;
         public string Captcha
         {
-            get => captcha;
-            set { SetProperty(ref captcha, value); }
+            get => objSignUp.Captcha;
+            set => objSignUp.Captcha = value;
         }
 
-        public Command SignUpClickCommand { get; }
+        public Command SignUpClickCommand
+        {
+            get => new Command(async () => await SignUpClick());
+        }
 
         #endregion
 
@@ -75,11 +73,10 @@ namespace RxOutlet.ViewModels
             try
             {
                 objRxOutletBR = new RxOutletBR();
-                SignUpClickCommand = new Command(async () => await SignUpClick());
             }
             catch (Exception ex)
             {
-                throw ex;
+                DisplayPopUp.ClientError();
             }
         }
 
@@ -93,54 +90,52 @@ namespace RxOutlet.ViewModels
             {
                 IsBusy = true;
 
-                if (string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(Password) && string.IsNullOrEmpty(ConfirmPassword))
+                if (objSignUp != null && string.IsNullOrEmpty(objSignUp.Email) && string.IsNullOrEmpty(objSignUp.Password) && string.IsNullOrEmpty(objSignUp.ConfirmPassword))
                 {
-                    Message = Messages.MandatoryFields; return;
+                    Message = Messages.MandatoryFields;
+                    return;
                 }
 
-                if (!Validations.IsEmailValidate(Email))
+                if (!Validations.IsEmailValidate(objSignUp.Email))
                 {
-                    Message = Messages.InvalidEmail; return;
+                    Message = Messages.InvalidEmail;
+                    return;
                 }
 
-                if (!Password.Equals(ConfirmPassword))
+                if (!objSignUp.Password.Equals(objSignUp.ConfirmPassword))
                 {
-                    Message = Messages.ConfirmPassword; return;
+                    Message = Messages.ConfirmPassword;
+                    return;
                 }
 
-                var res = Validations.IsPasswordValidate(Password);
+                Tuple<bool,string> res = Validations.IsPasswordValidate(Password);
                 if (!res.Item1)
                 {
-                    Message = res.Item2; return;
+                    Message = res.Item2;
+                    return;
                 }
 
                 if (!DeviceInformation.CheckDeviceInternetAccess())
                 {
-                    await Application.Current.MainPage.DisplayAlert("RxOutlet", Messages.CheckNetConnection, "OK");
+                    await DisplayPopUp.NetWorkFailure();
                     return;
                 }
 
-                ObjRegResponse = await objRxOutletBR.SignUp(new RegistrationModel()
-                {
-                    Name = Name,
-                    Email = Email,
-                    Password = Password,
-                    ConfirmPassword = ConfirmPassword,
-                    MobileNum = MobileNum,
-                    Captcha = Captcha
-                });
+                ObjRegResponse = await objRxOutletBR.SignUp(objSignUp);
 
-                if (ObjRegResponse != null && ObjRegResponse.Success)
+                if (ObjRegResponse == null) return;
+
+                if (ObjRegResponse.Success)
                     await NavigationService.PusyAsync(Navigation, new Login(true));
                 else
-                    Message = ObjRegResponse.Error[0];
+                    Message = ObjRegResponse.Error.FirstOrDefault();
 
                 IsBusy = false;
             }
             catch (Exception ex)
             {
                 IsBusy = false;
-                await Application.Current.MainPage.DisplayAlert(Messages.ProductName, Messages.ClientError, YesNO.OK.ToString());
+                DisplayPopUp.ClientError();
             }
             finally
             {

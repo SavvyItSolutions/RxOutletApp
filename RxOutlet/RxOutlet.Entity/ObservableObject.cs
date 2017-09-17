@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace RxOutlet.ViewModels
+namespace RxOutlet.Entity
 {
     public class ObservableObject : INotifyPropertyChanged
     {

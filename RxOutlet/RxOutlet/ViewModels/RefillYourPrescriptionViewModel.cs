@@ -1,4 +1,5 @@
 ﻿using RxOutlet.BusinessRules;
+using RxOutlet.Entity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using Xamarin.Forms;
 
 namespace RxOutlet.ViewModels
 {
-    public class RefillYourPrescriptionViewModel : ViewModelBase
+    public class RefillYourPrescriptionViewModel : BaseViewModel
     {
 
         #region Variables

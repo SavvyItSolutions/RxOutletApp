@@ -1,10 +1,17 @@
-﻿
-namespace RxOutlet.ViewModels
+﻿using Xamarin.Forms;
+
+namespace RxOutlet.Entity
 {
     public class BaseViewModel : ObservableObject
     {
-        private bool isBusy;
+        protected INavigation Navigation;
 
+        protected BaseViewModel(INavigation navigation)
+        {
+            Navigation = navigation;
+        }
+
+        private bool isBusy;
         public bool IsBusy
         {
             get => isBusy;
@@ -16,7 +23,6 @@ namespace RxOutlet.ViewModels
         }
 
         private bool isNotBusy;
-
         public bool IsNotBusy
         {
             get => isNotBusy;
@@ -25,6 +31,13 @@ namespace RxOutlet.ViewModels
                 if (SetProperty(ref isNotBusy, value))
                     IsBusy = !IsNotBusy;
             }
+        }
+
+        private string message;
+        public string Message
+        {
+            get => message;
+            set => SetProperty(ref message, value); 
         }
     }
 }

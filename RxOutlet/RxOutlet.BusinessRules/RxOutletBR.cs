@@ -1,4 +1,4 @@
-﻿using RxOutlet.Models;
+﻿using RxOutlet.Entity;
 using RxOutlet.Services;
 using System;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ namespace RxOutlet.BusinessRules
     {
         RxOutletServiceWrapper service = new RxOutletServiceWrapper();
         
-        public async Task<RegistrationResponseModel> SignUp(RegistrationModel model)
+        public async Task<SignUpResponseModel> SignUp(SignUpModel model)
         {
             try
             {
@@ -45,11 +45,11 @@ namespace RxOutlet.BusinessRules
             }
         }
 
-        public async Task<int> UploadProfilePic(Byte[] imageAsBytes)
+        public async Task<int> UploadProfilePic(ByteArrayModel model)
         {
             try
             {
-                return await service.UploadProfilePic(imageAsBytes);
+                return await service.UploadProfilePic(model);
             }
             catch (Exception ex)
             {

@@ -6,8 +6,6 @@ namespace RxOutlet.Common
         public const string ConfirmPassword = "Password and Confirm Password Should be Same.";
         public const string ClientError = "Gendral Client Error.";
 
-        public const string ProductName = "RxOutlet";
-
         public const string InvalidEmail = "Invalid Email";
         public const string ConfirmEmail = "Please confirm your email";
 

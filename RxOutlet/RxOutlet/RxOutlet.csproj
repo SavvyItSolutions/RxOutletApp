@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\DeviceInformation.cs" />
+    <Compile Include="Common\DisplayPopUp.cs" />
     <Compile Include="Common\Messages.cs" />
     <Compile Include="Common\RxEnums.cs" />
     <Compile Include="Common\Validations.cs" />
@@ -46,14 +47,11 @@
     <Compile Include="CustomControls\CustomEntry.cs" />
     <Compile Include="CustomControls\CustomLabel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationService.cs" />
-    <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\FillNewPrescriptionViewModel.cs" />
     <Compile Include="ViewModels\RefillYourPrescriptionViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -87,9 +85,6 @@
     <Reference Include="Plugin.Media.Abstractions, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="RxOutlet.Models">
-      <HintPath>..\..\packages\RxOutlet.Models.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -111,6 +106,10 @@
     <ProjectReference Include="..\RxOutlet.Dependency\RxOutlet.Dependency.csproj">
       <Project>{61487701-53be-4877-87ac-38bba7601ef3}</Project>
       <Name>RxOutlet.Dependency</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RxOutlet.Entity\RxOutlet.Entity.csproj">
+      <Project>{6f3d0cbf-1a37-489b-9a36-20a718ffd846}</Project>
+      <Name>RxOutlet.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

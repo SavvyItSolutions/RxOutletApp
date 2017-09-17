@@ -2,7 +2,7 @@
 //using Microsoft.WindowsAzure.Storage.Auth;
 //using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
-using RxOutlet.Models;
+using RxOutlet.Entity;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ namespace RxOutlet.Services
             }
         }
          
-        public async Task<RegistrationResponseModel> SignUp(RegistrationModel model)
+        public async Task<SignUpResponseModel> SignUp(SignUpModel model)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace RxOutlet.Services
                 var response = await client.PostAsync(uri, cont);
                 var output = await response.Content.ReadAsStringAsync();
 
-                var x = JsonConvert.DeserializeObject<RegistrationResponseModel>(output);
+                var x = JsonConvert.DeserializeObject<SignUpResponseModel>(output);
                 return x;
             }
             catch (Exception ex)
@@ -106,7 +106,7 @@ namespace RxOutlet.Services
             }
         }
 
-        public async Task<int> UploadProfilePic(Byte[] model)
+        public async Task<int> UploadProfilePic(ByteArrayModel model)
         {
             try
             {
