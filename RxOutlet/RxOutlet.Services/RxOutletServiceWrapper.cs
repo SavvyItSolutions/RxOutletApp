@@ -125,5 +125,29 @@ namespace RxOutlet.Services
             }
         }
 
+        public async Task<int> UploadProfilePic_Array(Byte[] model, string extension, string userId)
+        {
+            try
+            {
+                ByteArrayModel byt = new ByteArrayModel();
+                byt.array = model;
+                byt.FileExtension = extension;
+                byt.userid = userId;
+                var uri = new Uri(ServiceURL + "ByteArray");
+                var content = JsonConvert.SerializeObject(byt);
+                //var content = JsonConvert.SerializeObject(model);
+                var cont = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(uri, cont).ConfigureAwait(false);
+                var output = await response.Content.ReadAsStringAsync();
+
+                var x = JsonConvert.DeserializeObject<int>(output);
+                return x;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
