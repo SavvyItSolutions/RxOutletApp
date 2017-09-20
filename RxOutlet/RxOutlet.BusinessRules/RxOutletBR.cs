@@ -49,7 +49,7 @@ namespace RxOutlet.BusinessRules
         {
             try
             {
-                return await service.UploadProfilePic_Array(model);
+                return await service.UploadProfilePic(model);
             }
             catch (Exception ex)
             {
