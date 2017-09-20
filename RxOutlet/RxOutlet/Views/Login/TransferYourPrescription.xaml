@@ -2,10 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RxOutlet.Views.Login.TransferYourPrescription"
-             Title="Transfer Your Prescription">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+             Title="Transfer Your Prescription"
+             BackgroundColor="White">
+
+    <Grid>
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     Padding="30,0" Grid.Row="0">
+            <Entry Placeholder="Pharmacy Name"
+                   Text="{Binding PharmacyName}" />
+
+            <Entry Placeholder="Pharmacy Number"
+                   Text="{Binding PharmacyNumber}" />
+
+            <Entry Placeholder="Pharmacy Fax"
+                   Text="{Binding PharmacyFax}" />
+
+            <Entry Placeholder="Medication For"
+                   Text="{Binding MedicationFor}" />
+
+            <Entry Placeholder="Rx Number"
+                   Text="{Binding RxNumber}" />
+
+            <Button Text="Transfer"
+                    TextColor="White"
+                    BackgroundColor="Blue" />
         </StackLayout>
-    </ContentPage.Content>
+        <StackLayout IsVisible="{Binding IsBusy}" Grid.Row="0">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+        </StackLayout>
+    </Grid>
+    
 </ContentPage>

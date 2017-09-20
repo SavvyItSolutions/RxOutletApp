@@ -90,7 +90,7 @@ namespace RxOutlet.ViewModels
             {
                 IsBusy = true;
 
-                if (objSignUp != null && string.IsNullOrEmpty(objSignUp.Email) && string.IsNullOrEmpty(objSignUp.Password) && string.IsNullOrEmpty(objSignUp.ConfirmPassword))
+                if (objSignUp == null || string.IsNullOrEmpty(objSignUp.Email) || string.IsNullOrEmpty(objSignUp.Password) || string.IsNullOrEmpty(objSignUp.ConfirmPassword))
                 {
                     Message = Messages.MandatoryFields;
                     return;

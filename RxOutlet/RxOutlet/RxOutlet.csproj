@@ -52,6 +52,7 @@
     <Compile Include="ViewModels\FillNewPrescriptionViewModel.cs" />
     <Compile Include="ViewModels\RefillYourPrescriptionViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Compile Include="ViewModels\TransferYourPrescriptionViewModel.cs" />
     <Compile Include="Views\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

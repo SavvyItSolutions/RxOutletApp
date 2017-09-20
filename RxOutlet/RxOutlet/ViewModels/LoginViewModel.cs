@@ -77,7 +77,7 @@ namespace RxOutlet.ViewModels
                     return;
                 }
                 
-                if (objLoginModel == null && string.IsNullOrEmpty(objLoginModel.Email) && string.IsNullOrEmpty(objLoginModel.Password))
+                if (objLoginModel == null || string.IsNullOrEmpty(objLoginModel.Email) || string.IsNullOrEmpty(objLoginModel.Password))
                 {
                     IsBusy = false;
                     Message = Messages.MandatoryFields;

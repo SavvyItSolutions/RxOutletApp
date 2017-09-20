@@ -133,6 +133,8 @@ namespace RxOutlet.ViewModels
                     isFirst = !isFirst;
                 }
 
+                IsBusy = true;
+
                 await CrossMedia.Current.Initialize();
 
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) return;
@@ -147,7 +149,12 @@ namespace RxOutlet.ViewModels
             }
             catch (Exception ex)
             {
+                IsBusy = false;
                 DisplayPopUp.ClientError();
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -160,6 +167,8 @@ namespace RxOutlet.ViewModels
                     IsShow = !IsShow;
                     isFirst = !isFirst;
                 }
+
+                IsBusy = true;
 
                 Img = string.Empty;
 
@@ -177,6 +186,7 @@ namespace RxOutlet.ViewModels
             }
             catch (Exception ex)
             {
+                IsBusy = false;
                 DisplayPopUp.ClientError();
             }
         }
@@ -194,7 +204,7 @@ namespace RxOutlet.ViewModels
                     return;
                 }
 
-                if (objPrescModel == null && string.IsNullOrEmpty(objPrescModel.UserID) && string.IsNullOrEmpty(objPrescModel.PhysicianName) && string.IsNullOrEmpty(objPrescModel.PhysicianNumber) && string.IsNullOrEmpty(objPrescModel.MedicationFor))
+                if (objPrescModel == null || string.IsNullOrEmpty(objPrescModel.UserID) || string.IsNullOrEmpty(objPrescModel.PhysicianName) || string.IsNullOrEmpty(objPrescModel.PhysicianNumber) || string.IsNullOrEmpty(objPrescModel.MedicationFor))
                 {
                     Message = Messages.MandatoryFields;
                     return;
@@ -252,7 +262,7 @@ namespace RxOutlet.ViewModels
             }
             catch (Exception ex)
             {
-                DisplayPopUp.ClientError();
+                throw ex;
             }
         }
 

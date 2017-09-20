@@ -154,12 +154,16 @@
 
                         </Grid>
 
-                        <Button BackgroundColor="Green"
-                                Text="Submit"
-                                BorderRadius="0"
-                                Grid.Row="3"
-                                TextColor="White"
-                                Command="{Binding SubmitClickCommand}" />
+                        <StackLayout Grid.Row="3" Orientation="Horizontal">
+                            <Button BackgroundColor="Green"
+                                    Text="Submit"
+                                    BorderRadius="0"
+                                    TextColor="White"
+                                    Command="{Binding SubmitClickCommand}" HorizontalOptions="FillAndExpand" />
+                            <!--<ActivityIndicator IsRunning="{Binding IsBusy}"
+                                               IsVisible="{Binding IsBusy}" />-->
+                        </StackLayout>
+                      
                     </Grid>
                 </ScrollView>
             </Grid>
@@ -192,6 +196,17 @@
                 </Image>
 
             </Grid>
+
+            <StackLayout Grid.Row="0"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"
+                         Grid.RowSpan="4"
+                         IsVisible="{Binding IsBusy}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <ActivityIndicator IsVisible="{Binding IsBusy}"
+                                   IsRunning="{Binding IsBusy}" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
+            </StackLayout>
         </Grid>
         <!--<StackLayout>
             <Label Text="{Binding ErrorMsg}"

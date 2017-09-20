@@ -49,7 +49,19 @@ namespace RxOutlet.BusinessRules
         {
             try
             {
-                return await service.UploadProfilePic(model);
+                return await service.UploadProfilePic_Array(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<int> TransferPrescription(TransferPrescriptionModel model)
+        {
+            try
+            {
+                return await service.TransferPrescription(model);
             }
             catch (Exception ex)
             {

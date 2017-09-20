@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using RxOutlet.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +10,9 @@ namespace RxOutlet.Views.Login
         public TransferYourPrescription()
         {
             InitializeComponent();
+
+            NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = new TransferYourPrescriptionViewModel(Navigation);
         }
     }
 }

@@ -61,10 +61,11 @@ namespace RxOutlet.ViewModels
             {
                 List<RefillPrescription> list = new List<RefillPrescription>()
                 {
-                    new RefillPrescription(){PrescriptionName="PrescriptionName1",PrescriptionNum="PrescriptionNum1",LastDate="LastDate1",RefillItems="RefillItems1" },
-                    new RefillPrescription(){PrescriptionName="PrescriptionName2",PrescriptionNum="PrescriptionNum2",LastDate="LastDate2",RefillItems="RefillItems2" },
-                    new RefillPrescription(){PrescriptionName="PrescriptionName3",PrescriptionNum="PrescriptionNum3",LastDate="LastDate3",RefillItems="RefillItems3" },
-                    new RefillPrescription(){PrescriptionName="PrescriptionName4",PrescriptionNum="PrescriptionNum4",LastDate="LastDate4",RefillItems="RefillItems4" },
+                    new RefillPrescription(){PrescriptionName="Prescription Number - 1",PrescriptionNum="Mediction Name - 1",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 1" },
+                   new RefillPrescription(){PrescriptionName="Prescription Number - 1",PrescriptionNum="Mediction Name - 2",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 2" },
+                    new RefillPrescription(){PrescriptionName="Prescription Number - 3",PrescriptionNum="Mediction Name - 3",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 3" },
+                    new RefillPrescription(){PrescriptionName="Prescription Number - 4",PrescriptionNum="Mediction Name - 4",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 4" },
+                    new RefillPrescription(){PrescriptionName="Prescription Number - 5",PrescriptionNum="Mediction Name - 5",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 5" },
                 };
                 return list;
             }
