@@ -4,7 +4,8 @@ namespace RxOutlet.Common
     public static class Messages
     {
         public const string ConfirmPassword = "Password and Confirm Password Should be Same.";
-        public const string ClientError = "Gendral Client Error.";
+
+        public const string ClientError = "Client Error.";
 
         public const string InvalidEmail = "Invalid Email";
         public const string ConfirmEmail = "Please confirm your email";
@@ -17,5 +18,6 @@ namespace RxOutlet.Common
         public const string MandatoryFields = "Please enter Mandatory Fields";
         public const string CheckNetConnection = "Please check the internet connection";
         public const string ImgUploadedSuceess = "Uploaded prescription suceessfully";
+        public const string ImgUploadedFail = "Uploaded prescription is fail";
     }
 }

@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +43,7 @@
     <Compile Include="Common\DisplayPopUp.cs" />
     <Compile Include="Common\Messages.cs" />
     <Compile Include="Common\RxEnums.cs" />
+    <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Validations.cs" />
     <Compile Include="CustomControls\CustomEditor.cs" />
     <Compile Include="CustomControls\CustomEntry.cs" />
@@ -72,6 +74,17 @@
     <Compile Include="Views\Login\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Menu\Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\RxOutletMainPage.xaml.cs">
+      <DependentUpon>RxOutletMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\RxOutletMainPageMaster.xaml.cs">
+      <DependentUpon>RxOutletMainPageMaster.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\RxOutletMainPageMasterViewModel.cs" />
+    <Compile Include="Views\Menu\RxOutletMainPageMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -148,6 +161,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Login\Welcome.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Menu\RxOutletMainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Menu\RxOutletMainPageMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Menu\Page1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

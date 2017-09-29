@@ -2,6 +2,7 @@
 using RxOutlet.Entity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,13 +14,41 @@ namespace RxOutlet.ViewModels
         #region Variables
 
         private RxOutletBR objRxOutletBR = null;
+        private List<RefillPrescription> listRefill = new List<RefillPrescription>();
 
         #endregion
 
         #region Properties
 
-        public List<RefillPrescription> ListOfPrescription { get; set; }
+        private string prescSearch = string.Empty;
+        public string PrescSearch
+        {
+            get => prescSearch;
+            set
+                {
+                if (SetProperty(ref prescSearch, value))
+                {
+                    if (string.IsNullOrEmpty(PrescSearch))
+                    {
+                        ListOfPrescription = listRefill;
+                    }
+                       
+                }
+            }
+        }
+        private List<RefillPrescription> listOfPrescription = null;
+        public List<RefillPrescription> ListOfPrescription
+        {
+            get => listOfPrescription;
+            set => SetProperty(ref listOfPrescription, value); 
+        }
 
+        public Command SearchCommandClick
+        {
+            get => new Command(() => SearchClick());
+        }
+
+        
         #endregion
 
         #region Constractor
@@ -41,8 +70,26 @@ namespace RxOutlet.ViewModels
         {
             RefillPrescription obj = new RefillPrescription();
             ListOfPrescription = await obj.GetList();
+            listRefill = ListOfPrescription;
         }
 
+        private async void SearchClick()
+        {
+            try
+            {
+                ListOfPrescription = listRefill.Where(x => x.PrescriptionName.Contains(PrescSearch) || x.PrescriptionNum.Contains(PrescSearch)).ToList();
+
+                if(ListOfPrescription.Count == 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("RxOutlet", "No items found", "Ok");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
 
@@ -61,8 +108,8 @@ namespace RxOutlet.ViewModels
             {
                 List<RefillPrescription> list = new List<RefillPrescription>()
                 {
-                    new RefillPrescription(){PrescriptionName="Prescription Number - 1",PrescriptionNum="Mediction Name - 1",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 1" },
-                   new RefillPrescription(){PrescriptionName="Prescription Number - 1",PrescriptionNum="Mediction Name - 2",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 2" },
+                    new RefillPrescription(){PrescriptionName="Citalopram",PrescriptionNum="1234",LastDate="12/12/2016",RefillItems="2" },
+                   new RefillPrescription(){PrescriptionName="Prescription Number - 1",PrescriptionNum="Doxycycline",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 2" },
                     new RefillPrescription(){PrescriptionName="Prescription Number - 3",PrescriptionNum="Mediction Name - 3",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 3" },
                     new RefillPrescription(){PrescriptionName="Prescription Number - 4",PrescriptionNum="Mediction Name - 4",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 4" },
                     new RefillPrescription(){PrescriptionName="Prescription Number - 5",PrescriptionNum="Mediction Name - 5",LastDate="12/12/2016",RefillItems="No.of weeks to Refill - 5" },

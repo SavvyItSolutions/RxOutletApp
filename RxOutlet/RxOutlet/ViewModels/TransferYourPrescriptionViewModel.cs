@@ -1,4 +1,6 @@
-﻿using RxOutlet.Entity;
+﻿using RxOutlet.BusinessRules;
+using RxOutlet.Common;
+using RxOutlet.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace RxOutlet.ViewModels
         #region Variables
 
         private TransferPrescriptionModel objTranPres = new TransferPrescriptionModel();
+        private RxOutletBR objRxOutletBR = new RxOutletBR();
 
         #endregion
 
@@ -48,6 +51,12 @@ namespace RxOutlet.ViewModels
             set => objTranPres.RxNumber = value;
         }
 
+        public string UserID
+        {
+            get => objTranPres.UserID;
+            set => objTranPres.UserID = value;
+        }
+
         public Command TransferCommandClick
         {
             get => new Command(() => TransferClick());
@@ -60,6 +69,7 @@ namespace RxOutlet.ViewModels
         #region Constractor
         public TransferYourPrescriptionViewModel(INavigation navigation) : base(navigation)
         {
+            UserID = UserInfo.UserID;
         }
         #endregion
 
@@ -69,10 +79,51 @@ namespace RxOutlet.ViewModels
         {
             try
             {
+                int ObjTranPresResponse;
+                IsBusy = true;
+                if (objTranPres == null) return;
 
+                if (string.IsNullOrEmpty(objTranPres.PharmacyName) ||
+                    string.IsNullOrEmpty(objTranPres.PharmacyNumber) ||
+                    string.IsNullOrEmpty(objTranPres.RxNumber) ||
+                    string.IsNullOrEmpty(objTranPres.MedicationFor))
+                {
+                    Message = Messages.MandatoryFields;
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    return;
+                }
+
+                if (!DeviceInformation.CheckDeviceInternetAccess())
+                {
+                    await DisplayPopUp.NetWorkFailure();
+                    return;
+                }
+
+                ObjTranPresResponse = await objRxOutletBR.TransferPrescription(objTranPres);
+
+                if (ObjTranPresResponse == (int)StatusCode.Success)
+                {
+                    Message = "Suceess";
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                }
+                else
+                {
+                    Message = "Failure";
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    return;
+                }
             }
             catch (Exception ex)
             {
+                IsBusy = false;
+                DisplayPopUp.ClientError();
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
         #endregion

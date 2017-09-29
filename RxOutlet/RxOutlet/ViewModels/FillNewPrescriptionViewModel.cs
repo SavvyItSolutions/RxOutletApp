@@ -127,6 +127,7 @@ namespace RxOutlet.ViewModels
         {
             try
             {
+                int count;
                 if (IsShow)
                 {
                     IsShow = !IsShow;
@@ -143,9 +144,20 @@ namespace RxOutlet.ViewModels
 
                 if (file == null) return;
 
-                await UploadImage(file);
+                count = await UploadImage(file);
 
-                Message = Messages.ImgUploadedSuceess;
+                if (count == (int)StatusCode.Fail)
+                {
+                    Message = Messages.ImgUploadedFail;
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    return;
+                }
+                else
+                {
+                    Message = Messages.ImgUploadedSuceess;
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                }
             }
             catch (Exception ex)
             {
@@ -162,6 +174,7 @@ namespace RxOutlet.ViewModels
         {
             try
             {
+                int count;
                 if (IsShow)
                 {
                     IsShow = !IsShow;
@@ -180,7 +193,7 @@ namespace RxOutlet.ViewModels
 
                 if (file == null) return;
 
-                await UploadImage(file);
+                count = await UploadImage(file);
 
                 Message = Messages.ImgUploadedSuceess;
             }
@@ -188,6 +201,10 @@ namespace RxOutlet.ViewModels
             {
                 IsBusy = false;
                 DisplayPopUp.ClientError();
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -207,15 +224,26 @@ namespace RxOutlet.ViewModels
                 if (objPrescModel == null || string.IsNullOrEmpty(objPrescModel.UserID) || string.IsNullOrEmpty(objPrescModel.PhysicianName) || string.IsNullOrEmpty(objPrescModel.PhysicianNumber) || string.IsNullOrEmpty(objPrescModel.MedicationFor))
                 {
                     Message = Messages.MandatoryFields;
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
                     return;
                 }
 
                 insertItemCount = await objRxOutletBR.UploadPrescription(objPrescModel);
 
-                if (insertItemCount > 0)
-                    Message = "Success";
+                if (insertItemCount == (int)StatusCode.Success)
+                {
+                    Message = Messages.ImgUploadedSuceess;
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");                    
+                }
                 else
-                    Message = "Failur";
+                {
+                    Message = Messages.ImgUploadedSuceess;
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    return;
+                }
 
                 IsBusy = false;
             }
@@ -239,7 +267,7 @@ namespace RxOutlet.ViewModels
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private async Task UploadImage(MediaFile file)
+        private async Task<int> UploadImage(MediaFile file)
         {
             objByteModel = new ByteArrayModel();
             Byte[] imageAsBytes = null;
@@ -258,7 +286,7 @@ namespace RxOutlet.ViewModels
                 objByteModel.Array = imageAsBytes;
                 objByteModel.UserID = UserID;
 
-                int a = await objRxOutletBR.UploadProfilePic(objByteModel);
+                return await objRxOutletBR.UploadProfilePic(objByteModel);
             }
             catch (Exception ex)
             {

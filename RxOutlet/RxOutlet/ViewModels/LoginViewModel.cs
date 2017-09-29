@@ -98,12 +98,15 @@ namespace RxOutlet.ViewModels
                     if (objLoginResponse.IsMailConfirmed)
                     {
                         IsBusy = false;
+                        UserInfo.UserID = objLoginResponse.UserID;
                         await NavigationService.PusyAsync(Navigation, new Prescription(objLoginResponse.UserID));
                     }                        
                     else
                     {
                         IsBusy = false;
                         Message = Messages.ConfirmEmail;
+                        //Remove
+                        Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
                         return;
                     }
                 }                    
@@ -111,8 +114,10 @@ namespace RxOutlet.ViewModels
                 {
                     IsBusy = false;
                     Message = objLoginResponse.ErrorMessage;
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
                 }
-                                   
+
             }
             catch (Exception ex)
             {

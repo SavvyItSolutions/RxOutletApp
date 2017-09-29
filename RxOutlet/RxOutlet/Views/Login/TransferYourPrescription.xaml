@@ -25,11 +25,14 @@
 
             <Button Text="Transfer"
                     TextColor="White"
-                    BackgroundColor="Blue" />
+                    BackgroundColor="Blue"
+                    Command="{Binding TransferCommandClick}"/>
         </StackLayout>
-        <StackLayout IsVisible="{Binding IsBusy}" Grid.Row="0">
+        <StackLayout IsVisible="{Binding IsBusy}" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center">
             <ActivityIndicator IsRunning="{Binding IsBusy}"
-                               IsVisible="{Binding IsBusy}" />
+                               IsVisible="{Binding IsBusy}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
         </StackLayout>
     </Grid>
     

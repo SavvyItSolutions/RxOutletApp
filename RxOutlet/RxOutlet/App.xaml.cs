@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using RxOutlet.Views.Login;
+using RxOutlet.Views.Menu;
 
 namespace RxOutlet
 {
@@ -9,7 +10,8 @@ namespace RxOutlet
         {
             InitializeComponent();
 
-            MainPage = new  NavigationPage(new Welcome());
+            MainPage = new NavigationPage(new Welcome());
+           // MainPage = new RxOutletMainPage();
         }
 
         protected override void OnStart()

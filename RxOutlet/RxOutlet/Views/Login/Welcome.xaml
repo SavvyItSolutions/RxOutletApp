@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RxOutlet.Views.Login.Welcome" BackgroundColor="White">
+             x:Class="RxOutlet.Views.Login.Welcome" 
+             BackgroundColor="White">
+    
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -13,26 +16,37 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <Image Source="Logo.png"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   HeightRequest="250"
+                   WidthRequest="250"
+                   Margin="0,20"/>
+            
             <Label Text="Welcome To RxOutlet"
-                   VerticalTextAlignment="Center"
+                   VerticalTextAlignment="Start"
                    HorizontalTextAlignment="Center" 
                    Grid.Column="0"
                    Grid.ColumnSpan="2"
                    FontSize="20"
-                   Grid.Row="0"
+                   Grid.Row="1"
                    TextColor="Gray"/>
-            
-            <Button Text="Sign Up" Margin="10,10,5,10" BorderRadius="0"
+
+            <Button Text="Sign Up"
+                    Margin="10,10,5,10"
+                    BorderRadius="0"
                     Grid.Column="0"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     BackgroundColor="Green"
-                    TextColor="White" Clicked="SignUpClicked"/>
+                    TextColor="White"
+                    Clicked="SignUpClicked" />
 
             <Button Text="Login"
                     Margin="5,10,10,10"
                     BorderRadius="0"
                     Grid.Column="1"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     BackgroundColor="Green"
                     TextColor="White"
                     Clicked="LoginClicked"/>

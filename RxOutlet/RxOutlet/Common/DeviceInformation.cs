@@ -6,6 +6,17 @@ namespace RxOutlet.Common
 {
     public static class DeviceInformation 
     {
+        public static bool UserLoginFirstTime()
+        {
+            try
+            {
+                return DependencyService.Get<IUserLoginFirstTime>().LoginFirstTime();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static bool CheckDeviceInternetAccess()
         {
             try
@@ -29,5 +40,6 @@ namespace RxOutlet.Common
                 throw ex;
             }
         }
+
     }
 }

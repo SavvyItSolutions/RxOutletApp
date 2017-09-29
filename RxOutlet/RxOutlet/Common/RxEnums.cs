@@ -10,7 +10,8 @@ namespace RxOutlet.Common
 
     public enum StatusCode
     {
-        Success = 0
+        Success = 0,
+        Fail =1
     }
 
     public enum YesNO

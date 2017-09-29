@@ -16,11 +16,13 @@
 
         <Entry Placeholder="Prescription Number"
                Grid.Column="0"
-               Grid.Row="0" />
-        
+               Grid.Row="0" 
+               Text="{Binding PrescSearch}"/>
+
         <Button Text="Refill"
                 Grid.Column="1"
-                Grid.Row="0" BackgroundColor="Green" TextColor="White" />
+                Grid.Row="0" BackgroundColor="Green" TextColor="White" 
+                Command="{Binding SearchCommandClick}"/>
 
         <ListView Grid.Column="0"
                   Grid.ColumnSpan="2"

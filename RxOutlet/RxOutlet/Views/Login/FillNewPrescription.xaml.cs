@@ -7,7 +7,7 @@ namespace RxOutlet.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FillNewPrescription : ContentPage
     {
-        public FillNewPrescription(string UserID)
+        public FillNewPrescription(string UserID ="")
         {
             InitializeComponent();
 

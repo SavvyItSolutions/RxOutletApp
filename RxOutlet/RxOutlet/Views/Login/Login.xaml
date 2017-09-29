@@ -20,7 +20,12 @@
         </Grid.ColumnDefinitions>
 
         <Label x:Name="lblMsg"
-               LineBreakMode="WordWrap" TextColor="Green" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
+               LineBreakMode="WordWrap"
+               TextColor="Green"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               Grid.Row="0" />
+        
         <Grid Grid.Row="2"
               BackgroundColor="#F9FAFE"
               Grid.RowSpan="2"
@@ -104,8 +109,6 @@
                             BorderRadius="0"
                             Command="{Binding LoginClickCommand}"
                             HorizontalOptions="FillAndExpand" />
-                    <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                       IsVisible="{Binding IsBusy}" />
                 </StackLayout>
 
                 <BoxView BackgroundColor="Gray"
@@ -154,6 +157,36 @@
                    HorizontalOptions="StartAndExpand"
                    HorizontalTextAlignment="Start" />
         </StackLayout>
+
+        <StackLayout Grid.Column="0"
+                     Grid.ColumnSpan="3"
+                     Grid.Row="0"
+                     Grid.RowSpan="6"
+                     IsVisible="{Binding IsBusy}">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </StackLayout.GestureRecognizers>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"/>
+            
+        </StackLayout>
+
+        <!--<Grid Grid.Row="4" Grid.RowSpan="2">
+            
+            <Label Text="Existing Store User Customer"
+                   LineBreakMode="WordWrap" 
+                   Grid.Column="0" Margin="10" BackgroundColor="Red" TextColor="White"/>
+
+            <Label Text="Register Online"
+                   LineBreakMode="WordWrap"
+                   Grid.Column="1"
+                   Margin="10"
+                   BackgroundColor="Green"
+                   TextColor="White" />
+        </Grid>-->
 
     </Grid>
 
