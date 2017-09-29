@@ -3,8 +3,8 @@ namespace RxOutlet.Entity
 {
     public class ByteArrayModel
     {
-        public byte[] Array;
-        public string UserID;
-        public string FileExtension;
+        public byte[] array { get; set; }
+        public string userid { get; set; }
+        public string FileExtension { get; set; }
     }
 }

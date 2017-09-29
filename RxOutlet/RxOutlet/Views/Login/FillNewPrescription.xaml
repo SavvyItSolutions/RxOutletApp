@@ -206,6 +206,10 @@
                                    IsRunning="{Binding IsBusy}" 
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center"/>
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </StackLayout.GestureRecognizers>
             </StackLayout>
         </Grid>
         <!--<StackLayout>

@@ -283,8 +283,8 @@ namespace RxOutlet.ViewModels
                     imageAsBytes = memoryStream.ToArray();
                 }
 
-                objByteModel.Array = imageAsBytes;
-                objByteModel.UserID = UserID;
+                objByteModel.array = imageAsBytes;
+                objByteModel.userid = UserID;
 
                 return await objRxOutletBR.UploadProfilePic(objByteModel);
             }

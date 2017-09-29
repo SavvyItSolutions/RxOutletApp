@@ -8,7 +8,7 @@ using RxOutlet.Common;
 
 namespace RxOutlet.Droid
 {
-    [Activity(Label = "RxOutlet", Icon = "@drawable/Logo", Theme = "@style/MainTheme",  NoHistory =true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation =ScreenOrientation.Portrait)]
+    [Activity(Label = "RxOutlet", Icon = "@drawable/Logo", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation =ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         //AndroidUserLoginFirstTime obj = new AndroidUserLoginFirstTime();
