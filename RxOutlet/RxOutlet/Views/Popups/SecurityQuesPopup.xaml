@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popupPage:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     x:Class="RxOutlet.Views.Popups.SecurityQuesPopup"
+                     xmlns:popupPage="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                     xmlns:popupPageAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup">
+
+    <popupPage:PopupPage.Animation>
+        <popupPageAnimations:ScaleAnimation PositionIn="Bottom"
+                                            PositionOut="Center"
+                                            DurationIn="700"
+                                            EasingIn="BounceOut" />
+    </popupPage:PopupPage.Animation>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="BlueViolet"
+                     Padding="1"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center">
+
+            <Grid   BackgroundColor="White"
+                    HeightRequest="200"
+                    WidthRequest="270"
+                    Padding="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <Entry x:Name="txtDOB"
+                       Placeholder="Date of Birth"
+                       Grid.Row="0" />
+
+                <Entry x:Name="txtSSN"
+                       Placeholder="Where you got SSN"
+                       Grid.Row="1" />
+
+                <Entry x:Name="txtPhoneNo"
+                       Placeholder="Phone Number"
+                       Grid.Row="2" />
+
+                <Button x:Name="btnSubmit"
+                        Text="Submit"
+                        Grid.Row="3"
+                        TextColor="White"
+                        BackgroundColor="BlueViolet"
+                        Clicked="btnSubmit_Clicked"/>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</popupPage:PopupPage>

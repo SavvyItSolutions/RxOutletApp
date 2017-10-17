@@ -77,9 +77,10 @@ namespace RxOutlet.ViewModels
 
         private async void TransferClick()
         {
+            TransferPrescriptionResponse ObjTranPresResponse = null;
+
             try
             {
-                int ObjTranPresResponse;
                 IsBusy = true;
                 if (objTranPres == null) return;
 
@@ -90,7 +91,7 @@ namespace RxOutlet.ViewModels
                 {
                     Message = Messages.MandatoryFields;
                     //Remove
-                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    //Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
                     return;
                 }
 
@@ -102,17 +103,17 @@ namespace RxOutlet.ViewModels
 
                 ObjTranPresResponse = await objRxOutletBR.TransferPrescription(objTranPres);
 
-                if (ObjTranPresResponse == (int)StatusCode.Success)
+                if (ObjTranPresResponse.ErrorCode == (int)StatusCode.Success)
                 {
                     Message = "Suceess";
                     //Remove
-                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    //Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
                 }
                 else
                 {
                     Message = "Failure";
                     //Remove
-                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    //Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
                     return;
                 }
             }

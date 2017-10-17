@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxOutlet.Android", "RxOutlet\RxOutlet.Android\RxOutlet.Android.csproj", "{6D2BF1BB-861C-4DC4-8754-2DE59D02E774}"
 EndProject
@@ -187,7 +187,6 @@ Global
 		{8EC9834D-5FB3-4FEC-A53F-6BBBA74B951D}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{8EC9834D-5FB3-4FEC-A53F-6BBBA74B951D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{8EC9834D-5FB3-4FEC-A53F-6BBBA74B951D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EC9834D-5FB3-4FEC-A53F-6BBBA74B951D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8EC9834D-5FB3-4FEC-A53F-6BBBA74B951D}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{8EC9834D-5FB3-4FEC-A53F-6BBBA74B951D}.Release|iPhone.Build.0 = Release|Any CPU
 		{8EC9834D-5FB3-4FEC-A53F-6BBBA74B951D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU

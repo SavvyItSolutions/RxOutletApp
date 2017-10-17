@@ -16,12 +16,13 @@ namespace RxOutlet.Views.Login
         {
             InitializeComponent();
 
-            NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = new LoginViewModel(Navigation);
 
-            lblMsg.Text = isShowMsg ?
-                "Thank you for Signing Up. We have sent an email to your authorized email address.Please activate." : 
-                string.Empty;
+            txtEailID.NextFocusToControl = txtPsw;
+            //lblMsg.Text = isShowMsg ?
+            //    "Thank you for Signing Up. We have sent an email to your authorized email address.Please activate." : 
+            //    string.Empty;
         }
         
 

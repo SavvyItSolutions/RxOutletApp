@@ -3,6 +3,7 @@ using Plugin.Media.Abstractions;
 using RxOutlet.BusinessRules;
 using RxOutlet.Common;
 using RxOutlet.Entity;
+using RxOutlet.Views.Popups;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -85,12 +86,12 @@ namespace RxOutlet.ViewModels
 
         #region Constractor
 
-        public FillNewPrescriptionViewModel(INavigation navigation, string userID) : base(navigation)
+        public FillNewPrescriptionViewModel(INavigation navigation) : base(navigation)
         {
             try
             {
                 objRxOutletBR = new RxOutletBR();
-                UserID = userID;
+                UserID = UserInfo.UserID;
             }
             catch (Exception ex)
             {
@@ -102,20 +103,22 @@ namespace RxOutlet.ViewModels
 
         #region Events
 
-        private void SelectCameraOrGallery()
+        private async void SelectCameraOrGallery()
         {
             try
             {
-                if (isFirst)
-                {
-                    IsShow = true;
-                    isFirst = !isFirst;
-                }
-                else
-                {
-                    IsShow = false;
-                    isFirst = !isFirst;
-                }
+                await NavigationService.PushPopupAsync(Navigation, new CameraPopup());
+                return;
+                //if (isFirst)
+                //{
+                //    IsShow = true;
+                //    isFirst = !isFirst;
+                //}
+                //else
+                //{
+                //    IsShow = false;
+                //    isFirst = !isFirst;
+                //}
             }
             catch (Exception ex)
             {
@@ -128,14 +131,16 @@ namespace RxOutlet.ViewModels
             try
             {
                 int count;
-                if (IsShow)
-                {
-                    IsShow = !IsShow;
-                    isFirst = !isFirst;
-                }
+                //if (IsShow)
+                //{
+                //    IsShow = !IsShow;
+                //    isFirst = !isFirst;
+                //}
+                
+                await NavigationService.PopAllPopupAsync(Navigation);
+                Message = Messages.ImgUploadedFail;
 
                 IsBusy = true;
-
                 await CrossMedia.Current.Initialize();
 
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) return;
@@ -144,6 +149,7 @@ namespace RxOutlet.ViewModels
 
                 if (file == null) return;
 
+                IsBusy = true;
                 count = await UploadImage(file);
 
                 if (count == (int)StatusCode.Fail)
@@ -175,16 +181,9 @@ namespace RxOutlet.ViewModels
             try
             {
                 int count;
-                if (IsShow)
-                {
-                    IsShow = !IsShow;
-                    isFirst = !isFirst;
-                }
-
-                IsBusy = true;
-
-                Img = string.Empty;
-
+                
+                await NavigationService.PopAllPopupAsync(Navigation);
+                
                 await CrossMedia.Current.Initialize();
 
                 if (!CrossMedia.Current.IsPickPhotoSupported) return;
@@ -193,9 +192,22 @@ namespace RxOutlet.ViewModels
 
                 if (file == null) return;
 
+                IsBusy = true;
+
                 count = await UploadImage(file);
 
-                Message = Messages.ImgUploadedSuceess;
+                if (count == (int)StatusCode.Fail)
+                {
+                    Message = Messages.ImgUploadedFail;
+                    //Remove
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    return;
+                }
+                else
+                {
+                    Message = Messages.ImgUploadedSuceess;
+                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                }
             }
             catch (Exception ex)
             {
@@ -214,6 +226,7 @@ namespace RxOutlet.ViewModels
             try
             {
                 IsBusy = true;
+                Message = string.Empty;
 
                 if (!DeviceInformation.CheckDeviceInternetAccess())
                 {
@@ -225,27 +238,20 @@ namespace RxOutlet.ViewModels
                 {
                     Message = Messages.MandatoryFields;
                     //Remove
-                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
+                    //Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
                     return;
                 }
 
-                insertItemCount = await objRxOutletBR.UploadPrescription(objPrescModel);
+                var res = await objRxOutletBR.UploadPrescription(objPrescModel);
 
-                if (insertItemCount == (int)StatusCode.Success)
+                if (res.ErrorCode == (int)StatusCode.Success)
                 {
-                    Message = Messages.ImgUploadedSuceess;
-                    //Remove
-                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");                    
+                    Message = Messages.ImgUploadedSuceess;      
                 }
                 else
                 {
-                    Message = Messages.ImgUploadedSuceess;
-                    //Remove
-                    Application.Current.MainPage.DisplayAlert("RxOutlet", Message, "OK");
-                    return;
-                }
-
-                IsBusy = false;
+                    Message = Messages.ImgUploadedFail;
+                }                
             }
             catch (Exception ex)
             {
@@ -274,6 +280,7 @@ namespace RxOutlet.ViewModels
 
             try
             {
+                IsBusy = true;
                 objByteModel.FileExtension = Path.GetExtension(file.Path);
 
                 using (var memoryStream = new MemoryStream())
@@ -294,6 +301,10 @@ namespace RxOutlet.ViewModels
             }
         }
 
+        private void ClearFields()
+        {
+            //PhysicianName
+        }
         #endregion
 
     }

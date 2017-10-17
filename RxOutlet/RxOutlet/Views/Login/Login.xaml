@@ -2,9 +2,167 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RxOutlet.Views.Login.Login"
-             xmlns:customControl="clr-namespace:RxOutlet.CustomControls">
+             xmlns:customControl="clr-namespace:RxOutlet.CustomControls"
+             BackgroundColor="{StaticResource Key=LigthGray}"
+             Title="Login">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="customControl:CustomEntry">
+                <Setter Property="FontSize"
+                        Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-    <Grid BackgroundColor="{StaticResource Key=LigthGray}">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1"
+                  Grid.RowSpan="2"
+                  BackgroundColor="White"
+                  Margin="40,0"
+                  Padding="15,0,15,30"
+                  RowSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Text="{Binding Message}"
+                       TextColor="Red"
+                       Grid.Row="1" />
+
+                <Grid Grid.Row="2"
+                      ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="imgEmail"
+                           Aspect="AspectFit"
+                           Grid.Column="0"
+                           Source="Email.png" />
+
+                    <customControl:CustomEntry x:Name="txtEailID"
+                                               EntryButtonType="Next"
+                                               Grid.Column="1"
+                                               Keyboard="Email"
+                                               Placeholder="Email ID"
+                                               Text="{Binding Email}" />
+                </Grid>
+
+                <Grid Grid.Row="3"
+                      ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="imgPassword"
+                           Aspect="AspectFit"
+                           Grid.Column="0"
+                           Source="Password.png" />
+
+                    <customControl:CustomEntry x:Name="txtPsw"
+                                               Grid.Column="1"
+                                               Placeholder="Password"
+                                               IsPassword="True"
+                                               Text="{Binding Password}" />
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="imgRemberMe"
+                           Aspect="AspectFit"
+                           Scale="0.7"
+                           Grid.Column="0"
+                           HorizontalOptions="Center"
+                           Source="{Binding RemberMeImage}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RemberMeCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Grid.Column="1"
+                           Text="RemberMe?"
+                           VerticalTextAlignment="Center"
+                           TextColor="Gray" />
+                </Grid>
+                
+                <Button x:Name="btnLogin"
+                        BackgroundColor="BlueViolet"
+                        BorderRadius="0"
+                        Grid.Row="5"
+                        HeightRequest="50"
+                        Text="Login"
+                        Command="{Binding LoginCommand}"
+                        TextColor="White" />
+
+            </Grid>
+
+            <Image Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Source="Logo.png" />
+        </Grid>
+        
+        <customControl:CustomLabel Grid.Column="0"
+                                   Grid.Row="2"
+                                   Text="Forget Password?"
+                                   TextColor="Blue"
+                                   HorizontalTextAlignment="End"
+                                   IsUnderLine="True" 
+                                   Margin="0,0,40,0"/>
+
+        <customControl:CustomLabel Grid.Column="0"
+                                   Grid.Row="3"
+                                   Text="Terms and Conditions"
+                                   FontSize="10"
+                                   TextColor="Blue"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="0,40,0,0"
+                                   VerticalOptions="End"
+                                   IsUnderLine="True"/>
+
+        <StackLayout Grid.Column="0"
+                     Grid.Row="0"
+                     Grid.RowSpan="3"
+                     IsVisible="{Binding IsBusy}">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </StackLayout.GestureRecognizers>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand" />
+
+        </StackLayout>
+        
+    </Grid>
+
+    <!--<Grid BackgroundColor="{StaticResource Key=LigthGray}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.8*" />
             <RowDefinition Height="0.5*" />
@@ -174,7 +332,7 @@
             
         </StackLayout>
 
-        <!--<Grid Grid.Row="4" Grid.RowSpan="2">
+        <Grid Grid.Row="4" Grid.RowSpan="2">
             
             <Label Text="Existing Store User Customer"
                    LineBreakMode="WordWrap" 
@@ -186,8 +344,8 @@
                    Margin="10"
                    BackgroundColor="Green"
                    TextColor="White" />
-        </Grid>-->
+        </Grid>
 
-    </Grid>
+    </Grid>-->
 
 </ContentPage>

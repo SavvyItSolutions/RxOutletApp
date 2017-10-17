@@ -3,11 +3,171 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RxOutlet.Views.Login.FillNewPrescription"
              xmlns:customControl="clr-namespace:RxOutlet.CustomControls"
+             xmlns:cricleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              Title="Fill New Prescription"
-             BackgroundColor="White">
+             BackgroundColor="{StaticResource Key=LigthGray}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="FontSize"
+                        Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid BackgroundColor="#F1F2F6">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Text="Please Fill New Prescription by Updating the Prescription or by Filling the form"
+                   Grid.Row="0"
+                   TextColor="BlueViolet"
+                   FontSize="12"
+                   Margin="10,0"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center" />
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1"
+                      Grid.RowSpan="2"
+                      BackgroundColor="White"
+                      Margin="40,0"
+                      Padding="15,0,15,30"
+                      RowSpacing="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{Binding Message}"
+                           TextColor="Red"
+                           Grid.Row="1" />
+
+                    <Grid Grid.Row="2"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgPhyName"
+                               Aspect="AspectFit"
+                               Grid.Column="0"
+                               Source="PhyName.png" />
+
+                        <Entry x:Name="txtPhyName"
+                               Grid.Column="1"
+                               Placeholder="Physician Name"
+                               VerticalOptions="End"                               
+                               Text="{Binding PhysicianName}" />
+                    </Grid>
+
+                    <Grid Grid.Row="3"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgPhyNo"
+                               Aspect="AspectFit"
+                               Grid.Column="0"
+                               Source="PhyNo.png" />
+
+                        <Entry x:Name="txtPhyNo"
+                               Grid.Column="1"
+                               Keyboard="Telephone"
+                               Placeholder="Physician Number"
+                               IsPassword="True"
+                               VerticalOptions="End"
+                               Text="{Binding PhysicianNumber}" />
+                    </Grid>
+                    
+                    <Grid Grid.Row="4"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgMedician"
+                               Aspect="AspectFit"
+                               Grid.Column="0"
+                               Source="Medician.png" />
+
+                        <Entry x:Name="txtMedician"
+                               Grid.Column="1"
+                               Placeholder="Medician For"
+                               VerticalOptions="End"
+                               Text="{Binding MedicationFor}" />
+                    </Grid>
+
+                    <Button x:Name="btnSignUp"
+                            BackgroundColor="BlueViolet"
+                            BorderRadius="0"
+                            Grid.Row="5"
+                            HeightRequest="50"
+                            Text="Submit"
+                            Command="{Binding SubmitClickCommand}"
+                            TextColor="White" />
+
+                </Grid>
+
+                <cricleImage:CircleImage Grid.Row="0"
+                                         Grid.RowSpan="2"
+                                         BorderColor="BlueViolet"
+                                         BorderThickness="2"                                       
+                                         Source="PrescDetails.png" 
+                                         Aspect="AspectFit"
+                                         VerticalOptions="Center"/>
+            </Grid>
+
+            <cricleImage:CircleImage BorderColor="BlueViolet"
+                                     Source="Camera.png"
+                                     Grid.Row="3"
+                                     Margin="0,0,20,20"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End"
+                                     Aspect="AspectFit"
+                                     HeightRequest="50">
+                <cricleImage:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectCameraOrGalleryCommand}" />
+                </cricleImage:CircleImage.GestureRecognizers>
+            </cricleImage:CircleImage>
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.RowSpan="3"
+                         IsVisible="{Binding IsBusy,Mode=TwoWay}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </StackLayout.GestureRecognizers>
+
+                <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"
+                                   IsVisible="{Binding IsBusy,Mode=TwoWay}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand" />
+
+            </StackLayout>
+
+        </Grid>
+
+        <!--<Grid BackgroundColor="#F1F2F6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.8*" />
                 <RowDefinition Height="7.4*" />
@@ -160,8 +320,7 @@
                                     BorderRadius="0"
                                     TextColor="White"
                                     Command="{Binding SubmitClickCommand}" HorizontalOptions="FillAndExpand" />
-                            <!--<ActivityIndicator IsRunning="{Binding IsBusy}"
-                                               IsVisible="{Binding IsBusy}" />-->
+                           
                         </StackLayout>
                       
                     </Grid>
@@ -211,20 +370,8 @@
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
-        </Grid>
-        <!--<StackLayout>
-            <Label Text="{Binding ErrorMsg}"
-                   TextColor="Red" />
-            
-            <Button Text="Camera"
-                    Command="{Binding OpenCameraCommand}" />
+        </Grid>-->
 
-            <Button Text="Gallery"
-                    Command="{Binding OpenGalleryCommand}" />
-
-            <Image Source="{Binding Img}" />
-
-        </StackLayout>-->
     </ContentPage.Content>
 
 </ContentPage>

@@ -3,9 +3,17 @@ namespace RxOutlet.Common
 {
     public enum BorderTypeEnum
     {
+        Default,
         All,
         Bottom,
         No
+    }
+
+    public enum EntryButtonTypeEnum
+    {
+        None,
+        Next,
+        Save
     }
 
     public enum StatusCode

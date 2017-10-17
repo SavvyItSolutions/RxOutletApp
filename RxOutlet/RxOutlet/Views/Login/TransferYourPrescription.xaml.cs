@@ -14,5 +14,8 @@ namespace RxOutlet.Views.Login
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = new TransferYourPrescriptionViewModel(Navigation);
         }
+        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+        }
     }
 }

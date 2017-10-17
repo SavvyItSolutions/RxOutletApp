@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RxOutlet.Views.Login.RefillYourPrescription"
-             Title="Refill Your Prescription" BackgroundColor="White">
+             Title="Refill Your Prescription"
+             BackgroundColor="{StaticResource Key=LigthGray}">
+    
     <Grid Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,11 +29,95 @@
         <ListView Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Grid.Row="1"
-                  ItemsSource="{Binding ListOfPrescription}" SeparatorColor="Black">
+                  ItemsSource="{Binding ListOfPrescription}" 
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None"                            
+                  BackgroundColor="{StaticResource Key=LigthGray}">
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="0,2">
+                        <Grid BackgroundColor="White" Margin="5" Padding="10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image x:Name="imgMedician"
+                                       Grid.Column="0"
+                                       Grid.Row="0"
+                                       Grid.RowSpan="2"
+                                       Source="Medician"
+                                       HeightRequest="25"/>
+
+                                <Label x:Name="lblPresName"
+                                       Grid.Column="1"
+                                       Grid.Row="0"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding PrescriptionName}" />
+
+                                <Label x:Name="lblPresNo"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding PrescriptionNum}" />
+
+                                <Image Grid.Column="2"
+                                       Grid.Row="0"
+                                       Grid.RowSpan="2"
+                                       HeightRequest="20"
+                                       Source="Cricle.png"/>
+                            </Grid>
+
+                            <BoxView HeightRequest="1"
+                                     BackgroundColor="{StaticResource Key=PrimaryGray}"
+                                     Grid.Column="0"
+                                     Grid.Row="1" />
+
+                            <Grid Grid.Row="2"
+                                  BackgroundColor="White">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="3*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Grid.Row="0" 
+                                       Text="Refill"/>
+
+                                <Label Grid.Column="1"
+                                       Grid.Row="0"
+                                       Text=":" />
+
+                                <Label Grid.Column="0"
+                                       Grid.Row="1"
+                                       Text="Last Date" />
+
+                                <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                       Text=":" />
+                            </Grid>
+                            
+                        </Grid>
+                        <!--<Grid Padding="0,2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -64,7 +150,7 @@
                                    Grid.Column="2"
                                    Grid.Row="1" />
                             
-                        </Grid>
+                        </Grid>-->
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

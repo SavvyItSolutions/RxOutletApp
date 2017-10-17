@@ -7,17 +7,22 @@ namespace RxOutlet.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FillNewPrescription : ContentPage
     {
-        public FillNewPrescription(string UserID ="")
+        public FillNewPrescription()
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = new FillNewPrescriptionViewModel(Navigation,UserID);
+            BindingContext = new FillNewPrescriptionViewModel(Navigation);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = new FillNewPrescriptionViewModel(Navigation);
         }
 
         private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
-
         }
     }
 }

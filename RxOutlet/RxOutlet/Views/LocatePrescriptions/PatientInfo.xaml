@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RxOutlet.Views.LocatePrescriptions.PatientInfo"
+             xmlns:customControl="clr-namespace:RxOutlet.CustomControls"
+             xmlns:cricleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             BackgroundColor="{StaticResource Key=LigthGray}"
+             Title="Patient Information">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="customControl:CustomEntry">
+                <Setter Property="FontSize"
+                        Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid  Grid.Row="1"
+                       Grid.RowSpan="2"
+                       BackgroundColor="White"
+                       Margin="40,0"
+                       Padding="15,0,15,30"
+                       RowSpacing="10">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{Binding Message}"
+                           TextColor="Red"
+                           Grid.Row="1" />
+
+                    <ScrollView Grid.Row="2">
+                        <StackLayout>
+                            <customControl:CustomEntry x:Name="txtFName"
+                                                       Placeholder="First Name" />
+
+                            <customControl:CustomEntry x:Name="txtLName"
+                                                       Placeholder="Last Name" />
+
+                            <customControl:CustomEntry x:Name="txtDOB"
+                                                       Placeholder="Date Of Birth" />
+
+                            <customControl:CustomEntry x:Name="txtGender"
+                                                       Placeholder="Gender" />
+
+                            <customControl:CustomEntry x:Name="txtAddress"
+                                                       Placeholder="Address" />
+
+                            <customControl:CustomEntry x:Name="txtCity"
+                                                       Placeholder="City" />
+
+                            <customControl:CustomEntry x:Name="txtStates"
+                                                       Placeholder="States" />
+
+                            <customControl:CustomEntry x:Name="txtZip"
+                                                       Placeholder="ZIP Code" />
+
+                            
+                        </StackLayout>
+                    </ScrollView>
+
+                    <Button x:Name="btnSubmit"
+                            BackgroundColor="BlueViolet"
+                            BorderRadius="0"
+                            Grid.Row="3"
+                            HeightRequest="50"
+                            Text="Submit"
+                            TextColor="White" />
+                    
+                </Grid>
+
+                <cricleImage:CircleImage Grid.Row="0"
+                                         Grid.RowSpan="2"
+                                         Source="PatientInfo.png"
+                                         BorderColor="BlueViolet"
+                                         BorderThickness="1"
+                                         Aspect="AspectFit"/>
+            </Grid>
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.RowSpan="3"
+                         IsVisible="{Binding IsBusy}">
+                <!--<StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </StackLayout.GestureRecognizers>-->
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand" />
+
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

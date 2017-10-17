@@ -34,10 +34,10 @@ namespace RxOutlet.Common
                 if (!Regex.IsMatch(password, @"[!@#$%^&*]"))
                     msg.Append(Messages.PswNonChar);
 
-                if (!Regex.IsMatch(password, @"[A-Z]*$"))
+                if (!Regex.IsMatch(password, @"[A-Z]"))
                     msg.Append(Messages.PswAlp);
 
-                if (!Regex.IsMatch(password, @"[0-9]*$"))
+                if (!Regex.IsMatch(password, @"[0-9]"))
                     msg.Append(Messages.PswNo);
 
                 return string.IsNullOrEmpty(msg.ToString()) ?

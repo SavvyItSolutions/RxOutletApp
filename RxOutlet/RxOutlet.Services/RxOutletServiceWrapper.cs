@@ -17,7 +17,7 @@ namespace RxOutlet.Services
             client = new HttpClient();
             //client.MaxResponseContentBufferSize = 256000;
         }
-        
+
         public string ServiceURL
         {
             get
@@ -26,7 +26,7 @@ namespace RxOutlet.Services
                 return host + "api/RxOutlet/";
             }
         }
-         
+
         public async Task<SignUpResponseModel> SignUp(SignUpModel model)
         {
             try
@@ -65,7 +65,26 @@ namespace RxOutlet.Services
             }
         }
 
-        public async Task<int> UploadPrescription(UploadPrescriptionModel model)
+        public async Task<DrivingLicenseResponse> CheckDrivingLicense(string userID)
+        {
+            try
+            {
+                var uri = new Uri(ServiceURL + "CheckDL");
+                var content = JsonConvert.SerializeObject(userID);
+                var cont = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(uri, cont).ConfigureAwait(false);
+                var output = await response.Content.ReadAsStringAsync();
+
+                var finalOutput = JsonConvert.DeserializeObject<DrivingLicenseResponse>(output);
+                return finalOutput;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<UploadPrescriptionResponse> UploadPrescription(UploadPrescriptionModel model)
         {
             try
             {
@@ -75,7 +94,7 @@ namespace RxOutlet.Services
                 var response = await client.PostAsync(uri, cont).ConfigureAwait(false);
                 var output = await response.Content.ReadAsStringAsync();
 
-                var x = JsonConvert.DeserializeObject<int>(output);
+                var x = JsonConvert.DeserializeObject<UploadPrescriptionResponse>(output);
                 return x;
             }
             catch (Exception ex)
@@ -149,7 +168,7 @@ namespace RxOutlet.Services
             }
         }
 
-        public async Task<int> TransferPrescription(TransferPrescriptionModel model)
+        public async Task<TransferPrescriptionResponse> TransferPrescription(TransferPrescriptionModel model)
         {
             try
             {
@@ -159,7 +178,7 @@ namespace RxOutlet.Services
                 var response = await client.PostAsync(uri, cont).ConfigureAwait(false);
                 var output = await response.Content.ReadAsStringAsync();
 
-                var x = JsonConvert.DeserializeObject<int>(output);
+                var x = JsonConvert.DeserializeObject<TransferPrescriptionResponse>(output);
                 return x;
             }
             catch (Exception ex)

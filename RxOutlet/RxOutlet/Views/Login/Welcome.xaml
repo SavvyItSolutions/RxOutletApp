@@ -38,7 +38,7 @@
                     BorderRadius="0"
                     Grid.Column="0"
                     Grid.Row="2"
-                    BackgroundColor="Green"
+                    BackgroundColor="BlueViolet"
                     TextColor="White"
                     Clicked="SignUpClicked" />
 
@@ -47,7 +47,7 @@
                     BorderRadius="0"
                     Grid.Column="1"
                     Grid.Row="2"
-                    BackgroundColor="Green"
+                    BackgroundColor="BlueViolet"
                     TextColor="White"
                     Clicked="LoginClicked"/>
             

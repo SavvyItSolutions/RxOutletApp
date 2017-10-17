@@ -8,7 +8,14 @@ namespace RxOutlet.BusinessRules
     public class RxOutletBR
     {
         RxOutletServiceWrapper service = new RxOutletServiceWrapper();
-        
+
+        #region SignUp
+
+        /// <summary>
+        /// SignUp
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<SignUpResponseModel> SignUp(SignUpModel model)
         {
             try
@@ -21,6 +28,15 @@ namespace RxOutlet.BusinessRules
             }
         }
 
+        #endregion
+
+        #region Login
+
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<LoginResponse> Login(LoginModel model)
         {
             try
@@ -33,7 +49,28 @@ namespace RxOutlet.BusinessRules
             }
         }
 
-        public async Task<int> UploadPrescription(UploadPrescriptionModel model)
+        /// <summary>
+        /// CheckDrivingLicense
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public async Task<DrivingLicenseResponse> CheckDrivingLicense(string userID)
+        {
+            try
+            {
+                return await service.CheckDrivingLicense(userID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Priscription
+
+        public async Task<UploadPrescriptionResponse> UploadPrescription(UploadPrescriptionModel model)
         {
             try
             {
@@ -57,7 +94,7 @@ namespace RxOutlet.BusinessRules
             }
         }
 
-        public async Task<int> TransferPrescription(TransferPrescriptionModel model)
+        public async Task<TransferPrescriptionResponse> TransferPrescription(TransferPrescriptionModel model)
         {
             try
             {
@@ -68,5 +105,7 @@ namespace RxOutlet.BusinessRules
                 throw ex;
             }
         }
+
+        #endregion
     }
 }

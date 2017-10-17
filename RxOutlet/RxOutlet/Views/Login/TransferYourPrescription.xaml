@@ -2,10 +2,190 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RxOutlet.Views.Login.TransferYourPrescription"
+             xmlns:cricleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              Title="Transfer Your Prescription"
-             BackgroundColor="White">
+             BackgroundColor="{StaticResource Key=LigthGray}">
 
-    <Grid>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="FontSize"
+                        Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1"
+                      Grid.RowSpan="2"
+                      BackgroundColor="White"
+                      Margin="40,0"
+                      Padding="15,0,15,30"
+                      RowSpacing="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{Binding Message}"
+                           TextColor="Red"
+                           Grid.Row="1" />
+
+                    <Grid Grid.Row="2"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgPharName"
+                               Aspect="AspectFit"
+                               Grid.Column="0"
+                               Source="PharName.png" />
+
+                        <Entry x:Name="txtPharName"
+                               Grid.Column="1"
+                               Placeholder="Pharmacy Name"
+                               VerticalOptions="End"
+                               Text="{Binding PharmacyName}" />
+                    </Grid>
+
+                    <Grid Grid.Row="3"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgPharNum"
+                               Aspect="AspectFit"
+                               Grid.Column="0"
+                               Source="PhyNo.png" />
+
+                        <Entry x:Name="txtPharNum"
+                               Grid.Column="1"
+                               Keyboard="Telephone"
+                               Placeholder="Pharmacy Number"
+                               IsPassword="True"
+                               VerticalOptions="End"
+                               Text="{Binding PharmacyNumber}" />
+                    </Grid>
+
+                    <Grid Grid.Row="4"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgPharFax"
+                               Aspect="AspectFit"
+                               Grid.Column="0"
+                               Source="PharFax.png" />
+
+                        <Entry x:Name="txtPharFax"
+                               Grid.Column="1"
+                               Placeholder="Pharmacy Fax"
+                               VerticalOptions="End"
+                               Text="{Binding PharmacyFax}" />
+                    </Grid>
+
+                    <Grid Grid.Row="5"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgMedician"
+                               Aspect="AspectFit"
+                               Grid.Column="0"
+                               Source="Medician.png" />
+
+                        <Entry x:Name="txtMedician"
+                               Grid.Column="1"
+                               Placeholder="Medician For"
+                               VerticalOptions="End"
+                               Text="{Binding MedicationFor}" />
+                    </Grid>
+                    
+                    <Grid Grid.Row="6"
+                          ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="imgRxNum"
+                               Aspect="AspectFit"
+                               Grid.Column="0" />
+
+                        <Entry x:Name="txtRxNum"
+                               Grid.Column="1"
+                               Keyboard="Numeric"
+                               Placeholder="Rx Number"
+                               VerticalOptions="End"
+                               Text="{Binding RxNumber}" />
+                    </Grid>
+                    
+                    <Button x:Name="btnSignUp"
+                            BackgroundColor="BlueViolet"
+                            BorderRadius="0"
+                            Grid.Row="7"
+                            HeightRequest="50"
+                            Text="Transfer"
+                            Command="{Binding TransferCommandClick}"
+                            TextColor="White" />
+
+                </Grid>
+
+                <cricleImage:CircleImage Grid.Row="0"
+                                         Grid.RowSpan="2"
+                                         BorderColor="BlueViolet"
+                                         BorderThickness="2"
+                                         Source="TransPresc.png"
+                                         Aspect="AspectFit"
+                                         VerticalOptions="Center" />
+            </Grid>
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.RowSpan="3"
+                         IsVisible="{Binding IsBusy}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </StackLayout.GestureRecognizers>
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand" />
+
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+    <!--<Grid>
         <StackLayout VerticalOptions="CenterAndExpand"
                      Padding="30,0" Grid.Row="0">
             <Entry Placeholder="Pharmacy Name"
@@ -34,6 +214,6 @@
                                VerticalOptions="Center"
                                HorizontalOptions="Center" />
         </StackLayout>
-    </Grid>
+    </Grid>-->
     
 </ContentPage>
